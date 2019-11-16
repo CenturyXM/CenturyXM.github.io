@@ -11,11 +11,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
-    FirstTest |
+    TensorFlow2.0读取图片数据 |
     
     世纪小小孟</title>
   
-    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="shortcut icon" href="/pandas.jpg">
   
   <link rel="stylesheet" href="/css/style.css">
   
@@ -29,7 +29,7 @@
   <section class="outer">
   
 
-<article id="post-FirstTest" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-TensorFlow2.0读取图片数据" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
@@ -37,7 +37,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      FirstTest
+      TensorFlow2.0读取图片数据
     </h1>
   
   
@@ -50,7 +50,7 @@
 
     
       <div class="article-meta">
-        <a href="/2019/11/15/FirstTest/" class="article-date">
+        <a href="/2019/11/15/TensorFlow2.0%E8%AF%BB%E5%8F%96%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE/" class="article-date">
   <time datetime="2019-11-15T14:43:42.930Z" itemprop="datePublished">2019-11-15</time>
 </a>
         
@@ -72,10 +72,11 @@
       
 
       
-        <p>﻿—</p>
-<p>title: 被TensorFlow2.0图片数据读取折磨的这几天</p>
-<p>date: 2019-11-15 22:43:42</p>
-<p>tags: [深度学习,TensorFlow2.0]</p>
+        <hr>
+<p>title: TensorFlow2.0图片数据读取</p>
+<p>date: 2019/11/16 13:23:59</p>
+<p>tags: [TensorFlow2.0,深度学习]</p>
+<p>toc: true</p>
 <hr>
 <p>最近TensorFlow2.0正式发布，而且把Keras合并成为了TensorFlow2.0的一个高级API，这操作简直是爽啊。<br>然后我就屁跌儿屁跌儿的去学TensorFlow了，想着搭建一个图片分类器玩玩。调用tf.Keras简直不要太爽啊，搭好神经网络之后我开始读点图片测试程序能不能跑通。<br>刚打开文件我才意识到，读图片跟读文本、表格不一样，我就赶紧看<a href="https://tf.wiki/" target="_blank" rel="noopener">TensorFlow2.0的中文文档</a>还有其他百度的方法，这一看就是三四天，太折磨人了。<br>最后我放弃了文档和百度，自己看tf自带的数据集加载之后的type和shape，然后我发现图片数据加载完之后的类型是<code>array</code>形状是<code>(60000,28,28)</code>,形状的是一个四维向量，分别是：<code>(样本量，图片长度，图片宽度，图片通道数)</code>，因为我看的是Mnist数据集，它的图片是一个channels=1的图片，所以shape没有最后第四维。<br>通过观察这些特征之后我就自己使用numpy、os库自己尝试着把数据加载组合成这样的type和shape，代码如下：        </p>
 <pre><code class="python"><span class="comment"># 加载图片</span>
@@ -119,7 +120,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/15/FirstTest/" data-id="ck30ad9l00000mk247l663056"
+      <a data-url="http://yoursite.com/2019/11/15/TensorFlow2.0%E8%AF%BB%E5%8F%96%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE/" data-id="ck314oehb0000ys24gcn65xal"
          class="article-share-link">Share</a>
       
     </footer>
@@ -147,6 +148,8 @@
   
     <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
   
+    <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
 </ul>
     </div>
     <ul class="list-inline">
@@ -165,7 +168,7 @@
 <nav class="navbar">
   
     <div class="logo">
-      <a href="/"><img src="/images/hexo.svg" alt="世纪小小孟"></a>
+      <a href="/"><img src="/images/pandas.jpg" alt="世纪小小孟"></a>
     </div>
   
   <ul class="nav nav-main">
