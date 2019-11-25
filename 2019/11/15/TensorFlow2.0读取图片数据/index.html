@@ -72,7 +72,13 @@
       
 
       
-        <p>﻿﻿最近TensorFlow2.0正式发布，而且把Keras合并成为了TensorFlow2.0的一个高级API，这操作简直是爽啊。<br>然后我就屁跌儿屁跌儿的去学TensorFlow了，想着搭建一个图片分类器玩玩。调用tf.Keras简直不要太爽啊，搭好神经网络之后我开始读点图片测试程序能不能跑通。<br>刚打开文件我才意识到，读图片跟读文本、表格不一样，我就赶紧看<a href="https://tf.wiki/" target="_blank" rel="noopener">TensorFlow2.0的中文文档</a>还有其他百度的方法，这一看就是三四天，太折磨人了。<a id="more"></a>   </p>
+        <hr>
+<p>title:TensorFlow2.0读取图片数据<br>date: 2019-11-15 22:12:57<br>categories: </p>
+<ul>
+<li>深度学习</li>
+</ul>
+<hr>
+<p>﻿﻿﻿最近TensorFlow2.0正式发布，而且把Keras合并成为了TensorFlow2.0的一个高级API，这操作简直是爽啊。<br>然后我就屁跌儿屁跌儿的去学TensorFlow了，想着搭建一个图片分类器玩玩。调用tf.Keras简直不要太爽啊，搭好神经网络之后我开始读点图片测试程序能不能跑通。<br>刚打开文件我才意识到，读图片跟读文本、表格不一样，我就赶紧看<a href="https://tf.wiki/" target="_blank" rel="noopener">TensorFlow2.0的中文文档</a>还有其他百度的方法，这一看就是三四天，太折磨人了。<a id="more"></a>   </p>
 <!--more-->
 
 <p>最后我放弃了文档和百度，自己看tf自带的数据集加载之后的type和shape，然后我发现图片数据加载完之后的类型是<code>array</code>形状是<code>(60000,28,28)</code>,形状的是一个四维向量，分别是：<code>(样本量，图片长度，图片宽度，图片通道数)</code>，因为我看的是Mnist数据集，它的图片是一个channels=1的图片，所以shape没有最后第四维。<br>通过观察这些特征之后我就自己使用numpy、os库自己尝试着把数据加载组合成这样的type和shape，代码如下：        </p>
@@ -117,7 +123,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/15/TensorFlow2.0%E8%AF%BB%E5%8F%96%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE/" data-id="ck35mv6bk0000ok245wa60rz6"
+      <a data-url="http://yoursite.com/2019/11/15/TensorFlow2.0%E8%AF%BB%E5%8F%96%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE/" data-id="ck3ejnk550000c4246w05fmc5"
          class="article-share-link">Share</a>
       
     </footer>
