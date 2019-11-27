@@ -20,19 +20,20 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="">
+    <meta name="keywords" content="C/C++,分治算法,棋盘覆盖,数据结构">
     <meta name="description" content="最近老师给我们布置了一道OJ题目，是关于分治算法的，觉得很有意思，也自己琢磨出了解题代码，就来记录一下。">
-<meta name="keywords" content="学习随笔">
+<meta name="keywords" content="C&#x2F;C++,分治算法,棋盘覆盖,数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="分治算法-棋盘覆盖问题">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;16&#x2F;%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95-%E6%A3%8B%E7%9B%98%E8%A6%86%E7%9B%96%E9%97%AE%E9%A2%98&#x2F;index.html">
 <meta property="og:site_name" content="世纪小小孟">
 <meta property="og:description" content="最近老师给我们布置了一道OJ题目，是关于分治算法的，觉得很有意思，也自己琢磨出了解题代码，就来记录一下。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;1574306455652.jpeg">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;qipanfugai.png">
-<meta property="og:updated_time" content="2019-11-16T14:22:04.099Z">
+<meta property="og:updated_time" content="2019-11-27T12:37:47.925Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;qipanfugai.png">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;1574306455652.jpeg">
     
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
@@ -136,7 +137,7 @@
         <h1 class="title">分治算法-棋盘覆盖问题</h1>
         <h5 class="subtitle">
             
-                <time datetime="2019-11-16T13:54:33.824Z" itemprop="datePublished" class="page-time">
+                <time datetime="2019-11-15T16:00:00.000Z" itemprop="datePublished" class="page-time">
   2019-11-16
 </time>
 
@@ -160,7 +161,7 @@
     <div class="post-card">
         <h1 class="post-card-title">分治算法-棋盘覆盖问题</h1>
         <div class="post-meta">
-            <time class="post-time" title="2019-11-16 21:54:33" datetime="2019-11-16T13:54:33.824Z"  itemprop="datePublished">2019-11-16</time>
+            <time class="post-time" title="2019-11-16 00:00:00" datetime="2019-11-15T16:00:00.000Z"  itemprop="datePublished">2019-11-16</time>
 
             
 
@@ -173,234 +174,32 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>﻿﻿﻿最近老师给我们布置了一道OJ题目，是关于分治算法的，觉得很有意思，也自己琢磨出了解题代码，就来记录一下。   </p>
+            <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/1574306455652.jpeg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>﻿﻿﻿﻿
+<p>﻿﻿﻿﻿<br>﻿﻿﻿﻿最近老师给我们布置了一道OJ题目，是关于分治算法的，觉得很有意思，也自己琢磨出了解题代码，就来记录一下。   </p>
 <a id="more"></a>
 
 <p><a href="https://acm.hunnu.edu.cn/online/?action=problem&id=10432&type=show" target="_blank" rel="noopener">题目</a>:<br><img src="/images/qipanfugai.png" alt="">   </p>
 <!--more-->
 
 <p>代码如下：   </p>
-<pre><code class="c++"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span>
-<span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;
-<span class="keyword">int</span> qp[<span class="number">64</span>][<span class="number">64</span>];
-<span class="keyword">int</span> qz=<span class="number">1</span>;
-<span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">(<span class="keyword">int</span> th,<span class="keyword">int</span> tl,<span class="keyword">int</span> qh,<span class="keyword">int</span> jh,<span class="keyword">int</span> qsl,<span class="keyword">int</span> jzl)</span></span>
-<span class="function"></span>{ <span class="comment">//th/tl-特殊位置  qh/jz-起始行/截至行  qsl/jzl-起始列/截至列 </span>
-    <span class="keyword">int</span> zsh,zsl,ysh,ysl,zxh,zxl,yxh,yxl; <span class="comment">//记录每个分治的特殊位置：左上 右上 左下 右下 </span>
-    <span class="keyword">float</span> x,y; <span class="comment">//坐标原点 </span>
-    x=<span class="keyword">float</span>(qh+jh)/<span class="number">2</span>; y=<span class="keyword">float</span>(qsl+jzl)/<span class="number">2</span>;
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> qp[<span class="number">64</span>][<span class="number">64</span>];</span><br><span class="line"><span class="keyword">int</span> qz=<span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">(<span class="keyword">int</span> th,<span class="keyword">int</span> tl,<span class="keyword">int</span> qh,<span class="keyword">int</span> jh,<span class="keyword">int</span> qsl,<span class="keyword">int</span> jzl)</span></span></span><br><span class="line"><span class="function"></span>&#123; <span class="comment">//th/tl-特殊位置  qh/jz-起始行/截至行  qsl/jzl-起始列/截至列 </span></span><br><span class="line">	<span class="keyword">int</span> zsh,zsl,ysh,ysl,zxh,zxl,yxh,yxl; <span class="comment">//记录每个分治的特殊位置：左上 右上 左下 右下 </span></span><br><span class="line">	<span class="keyword">float</span> x,y; <span class="comment">//坐标原点 </span></span><br><span class="line">	x=<span class="keyword">float</span>(qh+jh)/<span class="number">2</span>; y=<span class="keyword">float</span>(qsl+jzl)/<span class="number">2</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//判断特殊点在第几象限</span></span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">float</span>(th)&lt;x &amp;&amp; <span class="keyword">float</span>(tl)&lt;y)&#123; <span class="comment">//第一象限 左上 </span></span><br><span class="line">		qp[<span class="keyword">int</span>(x+<span class="number">0.5</span>)][<span class="keyword">int</span>(y<span class="number">-0.5</span>)]=qp[<span class="keyword">int</span>(x+<span class="number">0.5</span>)][<span class="keyword">int</span>(y+<span class="number">0.5</span>)]=qp[<span class="keyword">int</span>(x<span class="number">-0.5</span>)][<span class="keyword">int</span>(y+<span class="number">0.5</span>)]=qz++;</span><br><span class="line">		 <span class="comment">//记录每个分治的特殊位置</span></span><br><span class="line">		zsh=th;zsl=tl; </span><br><span class="line">		ysh=<span class="keyword">int</span>(x<span class="number">-0.5</span>);ysl=<span class="keyword">int</span>(y+<span class="number">0.5</span>);</span><br><span class="line">		zxh=<span class="keyword">int</span>(x+<span class="number">0.5</span>);zxl=<span class="keyword">int</span>(y<span class="number">-0.5</span>);</span><br><span class="line">		yxh=<span class="keyword">int</span>(x+<span class="number">0.5</span>);yxl=<span class="keyword">int</span>(y+<span class="number">0.5</span>);</span><br><span class="line">	&#125; </span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">float</span>(th)&lt;x &amp;&amp; <span class="keyword">float</span>(tl)&gt;y)&#123; <span class="comment">//第二象限 右上 </span></span><br><span class="line">		qp[<span class="keyword">int</span>(x<span class="number">-0.5</span>)][<span class="keyword">int</span>(y<span class="number">-0.5</span>)]=qp[<span class="keyword">int</span>(x+<span class="number">0.5</span>)][<span class="keyword">int</span>(y+<span class="number">0.5</span>)]=qp[<span class="keyword">int</span>(x+<span class="number">0.5</span>)][<span class="keyword">int</span>(y<span class="number">-0.5</span>)]=qz++;</span><br><span class="line">		ysh=th;ysl=tl;</span><br><span class="line">		zsh=<span class="keyword">int</span>(x<span class="number">-0.5</span>);zsl=<span class="keyword">int</span>(y<span class="number">-0.5</span>);</span><br><span class="line">		zxh=<span class="keyword">int</span>(x+<span class="number">0.5</span>);zxl=<span class="keyword">int</span>(y<span class="number">-0.5</span>);</span><br><span class="line">		yxh=<span class="keyword">int</span>(x+<span class="number">0.5</span>);yxl=<span class="keyword">int</span>(y+<span class="number">0.5</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">float</span>(th)&gt;x &amp;&amp; <span class="keyword">float</span>(tl)&lt;y)&#123; <span class="comment">//第三象限 左下 </span></span><br><span class="line">		qp[<span class="keyword">int</span>(x<span class="number">-0.5</span>)][<span class="keyword">int</span>(y+<span class="number">0.5</span>)]=qp[<span class="keyword">int</span>(x<span class="number">-0.5</span>)][<span class="keyword">int</span>(y<span class="number">-0.5</span>)]=qp[<span class="keyword">int</span>(x+<span class="number">0.5</span>)][<span class="keyword">int</span>(y+<span class="number">0.5</span>)]=qz++;</span><br><span class="line">		zxh=th;zxl=tl;</span><br><span class="line">		ysh=<span class="keyword">int</span>(x<span class="number">-0.5</span>);ysl=<span class="keyword">int</span>(y+<span class="number">0.5</span>);</span><br><span class="line">		zsh=<span class="keyword">int</span>(x<span class="number">-0.5</span>);zsl=<span class="keyword">int</span>(y<span class="number">-0.5</span>);</span><br><span class="line">		yxh=<span class="keyword">int</span>(x+<span class="number">0.5</span>);yxl=<span class="keyword">int</span>(y+<span class="number">0.5</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">float</span>(th)&gt;x &amp;&amp; <span class="keyword">float</span>(tl)&gt;y)&#123; <span class="comment">//第四象限 右下 </span></span><br><span class="line">		qp[<span class="keyword">int</span>(x+<span class="number">0.5</span>)][<span class="keyword">int</span>(y<span class="number">-0.5</span>)]=qp[<span class="keyword">int</span>(x<span class="number">-0.5</span>)][<span class="keyword">int</span>(y<span class="number">-0.5</span>)]=qp[<span class="keyword">int</span>(x<span class="number">-0.5</span>)][<span class="keyword">int</span>(y+<span class="number">0.5</span>)]=qz++;</span><br><span class="line">		yxh=th;yxl=tl;</span><br><span class="line">		ysh=<span class="keyword">int</span>(x<span class="number">-0.5</span>);ysl=<span class="keyword">int</span>(y+<span class="number">0.5</span>);</span><br><span class="line">		zxh=<span class="keyword">int</span>(x+<span class="number">0.5</span>);zxl=<span class="keyword">int</span>(y<span class="number">-0.5</span>);</span><br><span class="line">		zsh=<span class="keyword">int</span>(x<span class="number">-0.5</span>);zsl=<span class="keyword">int</span>(y<span class="number">-0.5</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(qh+<span class="number">1</span>==jh) <span class="keyword">return</span>; <span class="comment">//分治结束</span></span><br><span class="line">	<span class="comment">//递归左上分治 </span></span><br><span class="line">	fun(zsh,zsl,qh,(qh+jh)/<span class="number">2</span>,qsl,(qsl+jzl)/<span class="number">2</span>);</span><br><span class="line">	<span class="comment">//递归右上分治 </span></span><br><span class="line">	fun(ysh,ysl,qh,(qh+jh)/<span class="number">2</span>,(qsl+jzl)/<span class="number">2</span>+<span class="number">1</span>,jzl);</span><br><span class="line">	<span class="comment">//递归左下分治 </span></span><br><span class="line">	fun(zxh,zxl,(qh+jh)/<span class="number">2</span>+<span class="number">1</span>,jh,qsl,(qsl+jzl)/<span class="number">2</span>);</span><br><span class="line">	<span class="comment">//递归右下分治</span></span><br><span class="line">	fun(yxh,yxl,(qh+jh)/<span class="number">2</span>+<span class="number">1</span>,jh,(qsl+jzl)/<span class="number">2</span>+<span class="number">1</span>,jzl);</span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> N,n,row,col,i,j,k=<span class="number">1</span>;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;N;</span><br><span class="line">	<span class="keyword">while</span>(N--)&#123;</span><br><span class="line">		qz=<span class="number">1</span>;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;row&gt;&gt;col;</span><br><span class="line">		fun(row,col,<span class="number">0</span>,n<span class="number">-1</span>,<span class="number">0</span>,n<span class="number">-1</span>);</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="string">"CASE:"</span>&lt;&lt;k++&lt;&lt;<span class="string">"\n"</span>;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">			<span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;n;j++)&#123;</span><br><span class="line">				<span class="keyword">if</span>(j!=n<span class="number">-1</span>) <span class="built_in">cout</span>&lt;&lt;qp[i][j]&lt;&lt;<span class="string">"\t"</span>;</span><br><span class="line">				<span class="keyword">else</span> <span class="built_in">cout</span>&lt;&lt;qp[i][j];</span><br><span class="line">			&#125; </span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;<span class="string">"\n"</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    <span class="comment">//判断特殊点在第几象限</span>
-    <span class="keyword">if</span>(<span class="keyword">float</span>(th)&lt;x &amp;&amp; <span class="keyword">float</span>(tl)&lt;y){ <span class="comment">//第一象限 左上 </span>
-        qp[<span class="keyword">int</span>(x+<span class="number">0.5</span>)][<span class="keyword">int</span>(y<span class="number">-0.5</span>)]=qp[<span class="keyword">int</span>(x+<span class="number">0.5</span>)][<span class="keyword">int</span>(y+<span class="number">0.5</span>)]=qp[<span class="keyword">int</span>(x<span class="number">-0.5</span>)][<span class="keyword">int</span>(y+<span class="number">0.5</span>)]=qz++;
-         <span class="comment">//记录每个分治的特殊位置</span>
-        zsh=th;zsl=tl; 
-        ysh=<span class="keyword">int</span>(x<span class="number">-0.5</span>);ysl=<span class="keyword">int</span>(y+<span class="number">0.5</span>);
-        zxh=<span class="keyword">int</span>(x+<span class="number">0.5</span>);zxl=<span class="keyword">int</span>(y<span class="number">-0.5</span>);
-        yxh=<span class="keyword">int</span>(x+<span class="number">0.5</span>);yxl=<span class="keyword">int</span>(y+<span class="number">0.5</span>);
-    } 
-    <span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">float</span>(th)&lt;x &amp;&amp; <span class="keyword">float</span>(tl)&gt;y){ <span class="comment">//第二象限 右上 </span>
-        qp[<span class="keyword">int</span>(x<span class="number">-0.5</span>)][<span class="keyword">int</span>(y<span class="number">-0.5</span>)]=qp[<span class="keyword">int</span>(x+<span class="number">0.5</span>)][<span class="keyword">int</span>(y+<span class="number">0.5</span>)]=qp[<span class="keyword">int</span>(x+<span class="number">0.5</span>)][<span class="keyword">int</span>(y<span class="number">-0.5</span>)]=qz++;
-        ysh=th;ysl=tl;
-        zsh=<span class="keyword">int</span>(x<span class="number">-0.5</span>);zsl=<span class="keyword">int</span>(y<span class="number">-0.5</span>);
-        zxh=<span class="keyword">int</span>(x+<span class="number">0.5</span>);zxl=<span class="keyword">int</span>(y<span class="number">-0.5</span>);
-        yxh=<span class="keyword">int</span>(x+<span class="number">0.5</span>);yxl=<span class="keyword">int</span>(y+<span class="number">0.5</span>);
-    }
-    <span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">float</span>(th)&gt;x &amp;&amp; <span class="keyword">float</span>(tl)&lt;y){ <span class="comment">//第三象限 左下 </span>
-        qp[<span class="keyword">int</span>(x<span class="number">-0.5</span>)][<span class="keyword">int</span>(y+<span class="number">0.5</span>)]=qp[<span class="keyword">int</span>(x<span class="number">-0.5</span>)][<span class="keyword">int</span>(y<span class="number">-0.5</span>)]=qp[<span class="keyword">int</span>(x+<span class="number">0.5</span>)][<span class="keyword">int</span>(y+<span class="number">0.5</span>)]=qz++;
-        zxh=th;zxl=tl;
-        ysh=<span class="keyword">int</span>(x<span class="number">-0.5</span>);ysl=<span class="keyword">int</span>(y+<span class="number">0.5</span>);
-        zsh=<span class="keyword">int</span>(x<span class="number">-0.5</span>);zsl=<span class="keyword">int</span>(y<span class="number">-0.5</span>);
-        yxh=<span class="keyword">int</span>(x+<span class="number">0.5</span>);yxl=<span class="keyword">int</span>(y+<span class="number">0.5</span>);
-    }
-    <span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">float</span>(th)&gt;x &amp;&amp; <span class="keyword">float</span>(tl)&gt;y){ <span class="comment">//第四象限 右下 </span>
-        qp[<span class="keyword">int</span>(x+<span class="number">0.5</span>)][<span class="keyword">int</span>(y<span class="number">-0.5</span>)]=qp[<span class="keyword">int</span>(x<span class="number">-0.5</span>)][<span class="keyword">int</span>(y<span class="number">-0.5</span>)]=qp[<span class="keyword">int</span>(x<span class="number">-0.5</span>)][<span class="keyword">int</span>(y+<span class="number">0.5</span>)]=qz++;
-        yxh=th;yxl=tl;
-        ysh=<span class="keyword">int</span>(x<span class="number">-0.5</span>);ysl=<span class="keyword">int</span>(y+<span class="number">0.5</span>);
-        zxh=<span class="keyword">int</span>(x+<span class="number">0.5</span>);zxl=<span class="keyword">int</span>(y<span class="number">-0.5</span>);
-        zsh=<span class="keyword">int</span>(x<span class="number">-0.5</span>);zsl=<span class="keyword">int</span>(y<span class="number">-0.5</span>);
-    }
-    <span class="keyword">if</span>(qh+<span class="number">1</span>==jh) <span class="keyword">return</span>; <span class="comment">//分治结束</span>
-    <span class="comment">//递归左上分治 </span>
-    fun(zsh,zsl,qh,(qh+jh)/<span class="number">2</span>,qsl,(qsl+jzl)/<span class="number">2</span>);
-    <span class="comment">//递归右上分治 </span>
-    fun(ysh,ysl,qh,(qh+jh)/<span class="number">2</span>,(qsl+jzl)/<span class="number">2</span>+<span class="number">1</span>,jzl);
-    <span class="comment">//递归左下分治 </span>
-    fun(zxh,zxl,(qh+jh)/<span class="number">2</span>+<span class="number">1</span>,jh,qsl,(qsl+jzl)/<span class="number">2</span>);
-    <span class="comment">//递归右下分治</span>
-    fun(yxh,yxl,(qh+jh)/<span class="number">2</span>+<span class="number">1</span>,jh,(qsl+jzl)/<span class="number">2</span>+<span class="number">1</span>,jzl);
-} 
-<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>{
-    <span class="keyword">int</span> N,n,row,col,i,j,k=<span class="number">1</span>;
-    <span class="built_in">cin</span>&gt;&gt;N;
-    <span class="keyword">while</span>(N--){
-        qz=<span class="number">1</span>;
-        <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;row&gt;&gt;col;
-        fun(row,col,<span class="number">0</span>,n<span class="number">-1</span>,<span class="number">0</span>,n<span class="number">-1</span>);
-        <span class="built_in">cout</span>&lt;&lt;<span class="string">"CASE:"</span>&lt;&lt;k++&lt;&lt;<span class="string">"\n"</span>;
-        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++){
-            <span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;n;j++){
-                <span class="keyword">if</span>(j!=n<span class="number">-1</span>) <span class="built_in">cout</span>&lt;&lt;qp[i][j]&lt;&lt;<span class="string">"\t"</span>;
-                <span class="keyword">else</span> <span class="built_in">cout</span>&lt;&lt;qp[i][j];
-            } 
-            <span class="built_in">cout</span>&lt;&lt;<span class="string">"\n"</span>;
-        }
-    }
-}
-
-</code></pre>
-<!--more-->
 
 <p>再放两个别人的代码：    </p>
 <ol>
 <li></li>
 </ol>
-<pre><code class="c++"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span>
-<span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;
-<span class="keyword">int</span> tile=<span class="number">1</span>;                   <span class="comment">//L型骨牌的编号(递增)</span>
-<span class="keyword">int</span> board[<span class="number">100</span>][<span class="number">100</span>];  <span class="comment">//棋盘</span>
-<span class="comment">/*****************************************************</span>
-<span class="comment">* 递归方式实现棋盘覆盖算法</span>
-<span class="comment">* 输入参数：</span>
-<span class="comment">* tr--当前棋盘左上角的行号</span>
-<span class="comment">* tc--当前棋盘左上角的列号</span>
-<span class="comment">* dr--当前特殊方格所在的行号</span>
-<span class="comment">* dc--当前特殊方格所在的列号</span>
-<span class="comment">* size：当前棋盘的:2^k</span>
-<span class="comment">*****************************************************/</span>
-<span class="function"><span class="keyword">void</span> <span class="title">chessBoard</span> <span class="params">( <span class="keyword">int</span> tr, <span class="keyword">int</span> tc, <span class="keyword">int</span> dr, <span class="keyword">int</span> dc, <span class="keyword">int</span> <span class="built_in">size</span> )</span></span>
-<span class="function"></span>{
-    <span class="keyword">if</span> ( <span class="built_in">size</span>==<span class="number">1</span> )    <span class="comment">//棋盘方格大小为1,说明递归到最里层</span>
-        <span class="keyword">return</span>;
-    <span class="keyword">int</span> t=tile++;     <span class="comment">//每次递增1</span>
-    <span class="keyword">int</span> s=<span class="built_in">size</span>/<span class="number">2</span>;    <span class="comment">//棋盘中间的行、列号(相等的)</span>
-    <span class="comment">//检查特殊方块是否在左上角子棋盘中</span>
-    <span class="keyword">if</span> ( dr&lt;tr+s &amp;&amp; dc&lt;tc+s )              <span class="comment">//在</span>
-        chessBoard ( tr, tc, dr, dc, s );
-    <span class="keyword">else</span>         <span class="comment">//不在，将该子棋盘右下角的方块视为特殊方块</span>
-    {
-        board[tr+s<span class="number">-1</span>][tc+s<span class="number">-1</span>]=t;
-        chessBoard ( tr, tc, tr+s<span class="number">-1</span>, tc+s<span class="number">-1</span>, s );
-    }
-    <span class="comment">//检查特殊方块是否在右上角子棋盘中</span>
-    <span class="keyword">if</span> ( dr&lt;tr+s &amp;&amp; dc&gt;=tc+s )               <span class="comment">//在</span>
-        chessBoard ( tr, tc+s, dr, dc, s );
-    <span class="keyword">else</span>          <span class="comment">//不在，将该子棋盘左下角的方块视为特殊方块</span>
-    {
-        board[tr+s<span class="number">-1</span>][tc+s]=t;
-        chessBoard ( tr, tc+s, tr+s<span class="number">-1</span>, tc+s, s );
-    }
-    <span class="comment">//检查特殊方块是否在左下角子棋盘中</span>
-    <span class="keyword">if</span> ( dr&gt;=tr+s &amp;&amp; dc&lt;tc+s )              <span class="comment">//在</span>
-        chessBoard ( tr+s, tc, dr, dc, s );
-    <span class="keyword">else</span>            <span class="comment">//不在，将该子棋盘右上角的方块视为特殊方块</span>
-    {
-        board[tr+s][tc+s<span class="number">-1</span>]=t;
-        chessBoard ( tr+s, tc, tr+s, tc+s<span class="number">-1</span>, s );
-    }
-    <span class="comment">//检查特殊方块是否在右下角子棋盘中</span>
-    <span class="keyword">if</span> ( dr&gt;=tr+s &amp;&amp; dc&gt;=tc+s )                <span class="comment">//在</span>
-        chessBoard ( tr+s, tc+s, dr, dc, s );
-    <span class="keyword">else</span>         <span class="comment">//不在，将该子棋盘左上角的方块视为特殊方块</span>
-    {
-        board[tr+s][tc+s]=t;
-        chessBoard ( tr+s, tc+s, tr+s, tc+s, s );
-    }
-}
-
-<span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>
-<span class="function"></span>{
-    <span class="keyword">int</span> <span class="built_in">size</span>;
-    <span class="built_in">cout</span>&lt;&lt;<span class="string">"输入棋盘的size(大小必须是2的n次幂): "</span>;
-    <span class="built_in">cin</span>&gt;&gt;<span class="built_in">size</span>;
-    <span class="keyword">int</span> index_x,index_y;
-    <span class="built_in">cout</span>&lt;&lt;<span class="string">"输入特殊方格位置的坐标: "</span>;
-    <span class="built_in">cin</span>&gt;&gt;index_x&gt;&gt;index_y;
-    chessBoard ( <span class="number">0</span>,<span class="number">0</span>,index_x,index_y,<span class="built_in">size</span> );
-    <span class="keyword">for</span> ( <span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="built_in">size</span>; i++ )
-    {
-        <span class="keyword">for</span> ( <span class="keyword">int</span> j=<span class="number">0</span>; j&lt;<span class="built_in">size</span>; j++ )
-            <span class="built_in">cout</span>&lt;&lt;board[i][j]&lt;&lt;<span class="string">"/t"</span>;
-        <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;
-    }
-}</code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> tile=<span class="number">1</span>;                   <span class="comment">//L型骨牌的编号(递增)</span></span><br><span class="line"><span class="keyword">int</span> board[<span class="number">100</span>][<span class="number">100</span>];  <span class="comment">//棋盘</span></span><br><span class="line"><span class="comment">/*****************************************************</span></span><br><span class="line"><span class="comment">* 递归方式实现棋盘覆盖算法</span></span><br><span class="line"><span class="comment">* 输入参数：</span></span><br><span class="line"><span class="comment">* tr--当前棋盘左上角的行号</span></span><br><span class="line"><span class="comment">* tc--当前棋盘左上角的列号</span></span><br><span class="line"><span class="comment">* dr--当前特殊方格所在的行号</span></span><br><span class="line"><span class="comment">* dc--当前特殊方格所在的列号</span></span><br><span class="line"><span class="comment">* size：当前棋盘的:2^k</span></span><br><span class="line"><span class="comment">*****************************************************/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">chessBoard</span> <span class="params">( <span class="keyword">int</span> tr, <span class="keyword">int</span> tc, <span class="keyword">int</span> dr, <span class="keyword">int</span> dc, <span class="keyword">int</span> <span class="built_in">size</span> )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> ( <span class="built_in">size</span>==<span class="number">1</span> )    <span class="comment">//棋盘方格大小为1,说明递归到最里层</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> t=tile++;     <span class="comment">//每次递增1</span></span><br><span class="line">    <span class="keyword">int</span> s=<span class="built_in">size</span>/<span class="number">2</span>;    <span class="comment">//棋盘中间的行、列号(相等的)</span></span><br><span class="line">    <span class="comment">//检查特殊方块是否在左上角子棋盘中</span></span><br><span class="line">    <span class="keyword">if</span> ( dr&lt;tr+s &amp;&amp; dc&lt;tc+s )              <span class="comment">//在</span></span><br><span class="line">        chessBoard ( tr, tc, dr, dc, s );</span><br><span class="line">    <span class="keyword">else</span>         <span class="comment">//不在，将该子棋盘右下角的方块视为特殊方块</span></span><br><span class="line">    &#123;</span><br><span class="line">        board[tr+s<span class="number">-1</span>][tc+s<span class="number">-1</span>]=t;</span><br><span class="line">        chessBoard ( tr, tc, tr+s<span class="number">-1</span>, tc+s<span class="number">-1</span>, s );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//检查特殊方块是否在右上角子棋盘中</span></span><br><span class="line">    <span class="keyword">if</span> ( dr&lt;tr+s &amp;&amp; dc&gt;=tc+s )               <span class="comment">//在</span></span><br><span class="line">        chessBoard ( tr, tc+s, dr, dc, s );</span><br><span class="line">    <span class="keyword">else</span>          <span class="comment">//不在，将该子棋盘左下角的方块视为特殊方块</span></span><br><span class="line">    &#123;</span><br><span class="line">        board[tr+s<span class="number">-1</span>][tc+s]=t;</span><br><span class="line">        chessBoard ( tr, tc+s, tr+s<span class="number">-1</span>, tc+s, s );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//检查特殊方块是否在左下角子棋盘中</span></span><br><span class="line">    <span class="keyword">if</span> ( dr&gt;=tr+s &amp;&amp; dc&lt;tc+s )              <span class="comment">//在</span></span><br><span class="line">        chessBoard ( tr+s, tc, dr, dc, s );</span><br><span class="line">    <span class="keyword">else</span>            <span class="comment">//不在，将该子棋盘右上角的方块视为特殊方块</span></span><br><span class="line">    &#123;</span><br><span class="line">        board[tr+s][tc+s<span class="number">-1</span>]=t;</span><br><span class="line">        chessBoard ( tr+s, tc, tr+s, tc+s<span class="number">-1</span>, s );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//检查特殊方块是否在右下角子棋盘中</span></span><br><span class="line">    <span class="keyword">if</span> ( dr&gt;=tr+s &amp;&amp; dc&gt;=tc+s )                <span class="comment">//在</span></span><br><span class="line">        chessBoard ( tr+s, tc+s, dr, dc, s );</span><br><span class="line">    <span class="keyword">else</span>         <span class="comment">//不在，将该子棋盘左上角的方块视为特殊方块</span></span><br><span class="line">    &#123;</span><br><span class="line">        board[tr+s][tc+s]=t;</span><br><span class="line">        chessBoard ( tr+s, tc+s, tr+s, tc+s, s );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">size</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"输入棋盘的size(大小必须是2的n次幂): "</span>;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;<span class="built_in">size</span>;</span><br><span class="line">    <span class="keyword">int</span> index_x,index_y;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"输入特殊方格位置的坐标: "</span>;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;index_x&gt;&gt;index_y;</span><br><span class="line">    chessBoard ( <span class="number">0</span>,<span class="number">0</span>,index_x,index_y,<span class="built_in">size</span> );</span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="built_in">size</span>; i++ )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> ( <span class="keyword">int</span> j=<span class="number">0</span>; j&lt;<span class="built_in">size</span>; j++ )</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;board[i][j]&lt;&lt;<span class="string">"/t"</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>2.</p>
-<pre><code class="c++"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span>
-<span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;
-<span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">11</span>;
-<span class="keyword">int</span> Board[N][N];
-<span class="keyword">int</span> tile = <span class="number">0</span>;
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">11</span>;</span><br><span class="line"><span class="keyword">int</span> Board[N][N];</span><br><span class="line"><span class="keyword">int</span> tile = <span class="number">0</span>;</span><br><span class="line"> </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">tr:棋盘左上角方格的行号</span></span><br><span class="line"><span class="comment">tc:棋盘左上角方格的列号</span></span><br><span class="line"><span class="comment">dr:特殊方格所在的行号</span></span><br><span class="line"><span class="comment">dc:特殊方格所在的列号</span></span><br><span class="line"><span class="comment">size:方形棋盘的边长</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ChessBoard</span><span class="params">(<span class="keyword">int</span> tr, <span class="keyword">int</span> tc, <span class="keyword">int</span> dr, <span class="keyword">int</span> dc, <span class="keyword">int</span> <span class="built_in">size</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">size</span> == <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> t = ++tile, s = <span class="built_in">size</span>/<span class="number">2</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">//覆盖左上角子棋盘</span></span><br><span class="line">    <span class="keyword">if</span>(dr&lt;tr+s &amp;&amp; dc&lt;tc+s)</span><br><span class="line">        <span class="comment">//特殊方格在此棋盘中</span></span><br><span class="line">        ChessBoard(tr, tc, dr, dc, s);</span><br><span class="line">    <span class="keyword">else</span>   <span class="comment">// 此棋盘无特殊方格</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 用t号L型骨型牌覆盖右下角</span></span><br><span class="line">        Board[tr+s<span class="number">-1</span>][tc+s<span class="number">-1</span>] = t;</span><br><span class="line">        <span class="comment">// 覆盖其余方格</span></span><br><span class="line">        ChessBoard(tr, tc, tr+s<span class="number">-1</span>, tc+s<span class="number">-1</span>, s);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">//覆盖右上角子棋盘</span></span><br><span class="line">    <span class="keyword">if</span>(dr&lt;tr+s &amp;&amp; dc&gt;=tc+s)</span><br><span class="line">        ChessBoard(tr, tc+s, dr, dc, s);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        Board[tr+s<span class="number">-1</span>][tc+s] = t;</span><br><span class="line">        ChessBoard(tr, tc+s, tr+s<span class="number">-1</span>, tc+s, s);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">//覆盖左下角子棋盘</span></span><br><span class="line">    <span class="keyword">if</span>(dr&gt;=tr+s &amp;&amp; dc&lt;tc+s)</span><br><span class="line">        ChessBoard(tr+s, tc, dr, dc, s);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        Board[tr+s][tc+s<span class="number">-1</span>] = t;</span><br><span class="line">        ChessBoard(tr+s, tc, tr+s, tc+s<span class="number">-1</span>, s);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">//覆盖右下角子棋盘</span></span><br><span class="line">    <span class="keyword">if</span>(dr&gt;=tr+s &amp;&amp; dc&gt;=tc+s)</span><br><span class="line">        ChessBoard(tr+s, tc+s, dr, dc, s);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        Board[tr+s][tc+s] = t;</span><br><span class="line">        ChessBoard(tr+s, tc+s, tr+s, tc+s, s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DisplayBoard</span><span class="params">(<span class="keyword">int</span> <span class="built_in">size</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=<span class="built_in">size</span>; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>; j&lt;=<span class="built_in">size</span>; ++j)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%2d "</span>, Board[i][j]);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ChessBoard(<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>);</span><br><span class="line">    DisplayBoard(<span class="number">4</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<span class="comment">/*</span>
-<span class="comment">tr:棋盘左上角方格的行号</span>
-<span class="comment">tc:棋盘左上角方格的列号</span>
-<span class="comment">dr:特殊方格所在的行号</span>
-<span class="comment">dc:特殊方格所在的列号</span>
-<span class="comment">size:方形棋盘的边长</span>
-<span class="comment">*/</span>
-<span class="function"><span class="keyword">void</span> <span class="title">ChessBoard</span><span class="params">(<span class="keyword">int</span> tr, <span class="keyword">int</span> tc, <span class="keyword">int</span> dr, <span class="keyword">int</span> dc, <span class="keyword">int</span> <span class="built_in">size</span>)</span></span>
-<span class="function"></span>{
-    <span class="keyword">if</span>(<span class="built_in">size</span> == <span class="number">1</span>)
-        <span class="keyword">return</span>;
-    <span class="keyword">int</span> t = ++tile, s = <span class="built_in">size</span>/<span class="number">2</span>;
 
-    <span class="comment">//覆盖左上角子棋盘</span>
-    <span class="keyword">if</span>(dr&lt;tr+s &amp;&amp; dc&lt;tc+s)
-        <span class="comment">//特殊方格在此棋盘中</span>
-        ChessBoard(tr, tc, dr, dc, s);
-    <span class="keyword">else</span>   <span class="comment">// 此棋盘无特殊方格</span>
-    {
-        <span class="comment">// 用t号L型骨型牌覆盖右下角</span>
-        Board[tr+s<span class="number">-1</span>][tc+s<span class="number">-1</span>] = t;
-        <span class="comment">// 覆盖其余方格</span>
-        ChessBoard(tr, tc, tr+s<span class="number">-1</span>, tc+s<span class="number">-1</span>, s);
-    }
-
-    <span class="comment">//覆盖右上角子棋盘</span>
-    <span class="keyword">if</span>(dr&lt;tr+s &amp;&amp; dc&gt;=tc+s)
-        ChessBoard(tr, tc+s, dr, dc, s);
-    <span class="keyword">else</span>
-    {
-        Board[tr+s<span class="number">-1</span>][tc+s] = t;
-        ChessBoard(tr, tc+s, tr+s<span class="number">-1</span>, tc+s, s);
-    }
-
-    <span class="comment">//覆盖左下角子棋盘</span>
-    <span class="keyword">if</span>(dr&gt;=tr+s &amp;&amp; dc&lt;tc+s)
-        ChessBoard(tr+s, tc, dr, dc, s);
-    <span class="keyword">else</span>
-    {
-        Board[tr+s][tc+s<span class="number">-1</span>] = t;
-        ChessBoard(tr+s, tc, tr+s, tc+s<span class="number">-1</span>, s);
-    }
-
-    <span class="comment">//覆盖右下角子棋盘</span>
-    <span class="keyword">if</span>(dr&gt;=tr+s &amp;&amp; dc&gt;=tc+s)
-        ChessBoard(tr+s, tc+s, dr, dc, s);
-    <span class="keyword">else</span>
-    {
-        Board[tr+s][tc+s] = t;
-        ChessBoard(tr+s, tc+s, tr+s, tc+s, s);
-    }
-}
-
-<span class="function"><span class="keyword">void</span> <span class="title">DisplayBoard</span><span class="params">(<span class="keyword">int</span> <span class="built_in">size</span>)</span></span>
-<span class="function"></span>{
-    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=<span class="built_in">size</span>; ++i)
-    {
-        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>; j&lt;=<span class="built_in">size</span>; ++j)
-            <span class="built_in">printf</span>(<span class="string">"%2d "</span>, Board[i][j]);
-        <span class="built_in">printf</span>(<span class="string">"\n"</span>);
-    }
-}
-
-<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>
-<span class="function"></span>{
-    ChessBoard(<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>);
-    DisplayBoard(<span class="number">4</span>);
-    <span class="keyword">return</span> <span class="number">0</span>;
-}</code></pre>
-<!--more-->
 
 <p>因为我头脑简单，所以觉得自己的代码比别人的好懂。<br>以上别人的代码来自<a href="https://www.cnblogs.com/mycapple/archive/2012/08/20/2648094.html" target="_blank" rel="noopener">这里</a></p>
 
@@ -411,7 +210,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-11-16T14:22:04.099Z" itemprop="dateUpdated">2019-11-16 22:22:04</time>
+    最后更新时间：<time datetime="2019-11-27T12:37:47.925Z" itemprop="dateUpdated">2019-11-27 20:37:47</time>
 </span><br>
 
 
@@ -437,6 +236,8 @@
 
         <div class="post-footer">
             
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/" rel="tag">C/C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/" rel="tag">分治算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A3%8B%E7%9B%98%E8%A6%86%E7%9B%96/" rel="tag">棋盘覆盖</a></li></ul>
+
 
             
 <div class="page-share-wrap">
@@ -455,7 +256,12 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/11/16/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95-%E6%A3%8B%E7%9B%98%E8%A6%86%E7%9B%96%E9%97%AE%E9%A2%98/&title=《分治算法-棋盘覆盖问题》 — 世纪小小孟&source=﻿﻿﻿最近老师给我们布置了一道OJ题目，是关于分治算法的，觉得很有意思，也自己琢磨出了解题代码，就来记录一下。   " data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/11/16/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95-%E6%A3%8B%E7%9B%98%E8%A6%86%E7%9B%96%E9%97%AE%E9%A2%98/&title=《分治算法-棋盘覆盖问题》 — 世纪小小孟&source=
+                
+                    
+                    
+                
+..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -493,7 +299,7 @@
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/2019/11/19/%E6%85%95%E8%AF%BE%E8%AF%84%E8%AE%BA%E7%88%AC%E8%99%AB/" id="post-prev" class="post-nav-link">
+      <a href="/2019/11/21/%E6%85%95%E8%AF%BE%E8%AF%84%E8%AE%BA%E7%88%AC%E8%99%AB/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
         <h4 class="title">慕课评论爬虫</h4>
       </a>
@@ -504,7 +310,7 @@
     <div class="waves-block waves-effect next">
       <a href="/2019/11/15/TensorFlow2.0%E8%AF%BB%E5%8F%96%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">TensorFlow2.0读取图片数据</h4>
+        <h4 class="title">TensorFlow2.0图片数据读取</h4>
       </a>
     </div>
   
@@ -612,7 +418,12 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/11/16/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95-%E6%A3%8B%E7%9B%98%E8%A6%86%E7%9B%96%E9%97%AE%E9%A2%98/&title=《分治算法-棋盘覆盖问题》 — 世纪小小孟&source=﻿﻿﻿最近老师给我们布置了一道OJ题目，是关于分治算法的，觉得很有意思，也自己琢磨出了解题代码，就来记录一下。   " data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/11/16/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95-%E6%A3%8B%E7%9B%98%E8%A6%86%E7%9B%96%E9%97%AE%E9%A2%98/&title=《分治算法-棋盘覆盖问题》 — 世纪小小孟&source=
+                
+                    
+                    
+                
+..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>

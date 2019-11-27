@@ -14,26 +14,27 @@
     
     
     
-    <title>TensorFlow2.0读取图片数据 | 世纪小小孟 | Always believe that something wonderful is about to happen</title>
+    <title>TensorFlow2.0图片数据读取 | 世纪小小孟 | Always believe that something wonderful is about to happen</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="">
-    <meta name="description" content="— ﻿﻿﻿最近TensorFlow2.0正式发布，而且把Keras合并成为了TensorFlow2.0的一个高级API，这操作简直是爽啊。然后我就屁跌儿屁跌儿的去学TensorFlow了，想着搭建一个图片分类器玩玩。调用tf.Keras简直不要太爽啊，搭好神经网络之后我开始读点图片测试程序能不能跑通。刚打开文件我才意识到，读图片跟读文本、表格不一样，我就赶紧看TensorFlow2.0的中文文档">
-<meta name="keywords" content="学习随笔">
+    <meta name="keywords" content="深度学习,TensorFlow2.0,Python,图像,数据读取">
+    <meta name="description" content="最近TensorFlow2.0正式发布，而且把Keras合并成为了TensorFlow2.0的一个高级API，这操作简直是爽啊。然后我就屁跌儿屁跌儿的去学TensorFlo">
+<meta name="keywords" content="深度学习,TensorFlow2.0,Python,图像,数据读取">
 <meta property="og:type" content="article">
-<meta property="og:title" content="TensorFlow2.0读取图片数据">
+<meta property="og:title" content="TensorFlow2.0图片数据读取">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;15&#x2F;TensorFlow2.0%E8%AF%BB%E5%8F%96%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE&#x2F;index.html">
 <meta property="og:site_name" content="世纪小小孟">
-<meta property="og:description" content="— ﻿﻿﻿最近TensorFlow2.0正式发布，而且把Keras合并成为了TensorFlow2.0的一个高级API，这操作简直是爽啊。然后我就屁跌儿屁跌儿的去学TensorFlow了，想着搭建一个图片分类器玩玩。调用tf.Keras简直不要太爽啊，搭好神经网络之后我开始读点图片测试程序能不能跑通。刚打开文件我才意识到，读图片跟读文本、表格不一样，我就赶紧看TensorFlow2.0的中文文档">
+<meta property="og:description" content="最近TensorFlow2.0正式发布，而且把Keras合并成为了TensorFlow2.0的一个高级API，这操作简直是爽啊。然后我就屁跌儿屁跌儿的去学TensorFlo">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;1574306436797.jpeg">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;result_1.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;map().png">
-<meta property="og:updated_time" content="2019-11-26T14:11:10.535Z">
+<meta property="og:updated_time" content="2019-11-27T12:37:45.627Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;result_1.png">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;1574306436797.jpeg">
     
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
@@ -112,7 +113,7 @@
         <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">TensorFlow2.0读取图片数据</div>
+        <div class="flex-col header-title ellipsis">TensorFlow2.0图片数据读取</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -134,10 +135,10 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">TensorFlow2.0读取图片数据</h1>
+        <h1 class="title">TensorFlow2.0图片数据读取</h1>
         <h5 class="subtitle">
             
-                <time datetime="2019-11-15T14:43:42.930Z" itemprop="datePublished" class="page-time">
+                <time datetime="2019-11-14T16:00:00.000Z" itemprop="datePublished" class="page-time">
   2019-11-15
 </time>
 
@@ -159,9 +160,9 @@
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">TensorFlow2.0读取图片数据</h1>
+        <h1 class="post-card-title">TensorFlow2.0图片数据读取</h1>
         <div class="post-meta">
-            <time class="post-time" title="2019-11-15 22:43:42" datetime="2019-11-15T14:43:42.930Z"  itemprop="datePublished">2019-11-15</time>
+            <time class="post-time" title="2019-11-15 00:00:00" datetime="2019-11-14T16:00:00.000Z"  itemprop="datePublished">2019-11-15</time>
 
             
 
@@ -174,42 +175,18 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>﻿—</p>
+            <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/1574306436797.jpeg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>﻿﻿﻿﻿
 <p>﻿﻿﻿最近TensorFlow2.0正式发布，而且把Keras合并成为了TensorFlow2.0的一个高级API，这操作简直是爽啊。<br>然后我就屁跌儿屁跌儿的去学TensorFlow了，想着搭建一个图片分类器玩玩。调用tf.Keras简直不要太爽啊，搭好神经网络之后我开始读点图片测试程序能不能跑通。<br>刚打开文件我才意识到，读图片跟读文本、表格不一样，我就赶紧看<a href="https://tf.wiki/" target="_blank" rel="noopener">TensorFlow2.0的中文文档</a>还有其他百度的方法，这一看就是三四天，太折磨人了。<a id="more"></a>   </p>
 <!--more-->
 
 <p>最后我放弃了文档和百度，自己看tf自带的数据集加载之后的type和shape，然后我发现图片数据加载完之后的类型是<code>array</code>形状是<code>(60000,28,28)</code>,形状的是一个四维向量，分别是：<code>(样本量，图片长度，图片宽度，图片通道数)</code>，因为我看的是Mnist数据集，它的图片是一个channels=1的图片，所以shape没有最后第四维。<br>通过观察这些特征之后我就自己使用numpy、os库自己尝试着把数据加载组合成这样的type和shape，代码如下：        </p>
-<pre><code class="python"><span class="comment"># 加载图片</span>
-<span class="function"><span class="keyword">def</span> <span class="title">imgfun</span><span class="params">(fn)</span>:</span>
-    image_string = tf.io.read_file(fn)
-    image_decoded = tf.image.decode_jpeg(image_string,channels=<span class="number">3</span>)
-    image_resized = tf.image.resize(image_decoded, [<span class="number">200</span>, <span class="number">200</span>]) / <span class="number">255.0</span>
-    image = np.array(image_resized).tolist()
-    <span class="keyword">return</span> image
-
-<span class="comment"># 处理图片</span>
-<span class="function"><span class="keyword">def</span> <span class="title">process_img</span><span class="params">(pdir_1,pdir_2,n1,n2)</span>:</span>
-    pathdir_1 = os.listdir(pdir_1) <span class="comment"># 根目录</span>
-    pathdir_2 = os.listdir(pdir_2)
-
-    <span class="comment"># 路径合并</span>
-    paths = [pdir_1 + path <span class="keyword">for</span> path <span class="keyword">in</span> pathdir_1]
-    paths.extend([pdir_2 + path <span class="keyword">for</span> path <span class="keyword">in</span> pathdir_2]) <span class="comment"># 合并形成完整图片路径</span>
-
-    <span class="comment"># 添加标签</span>
-    labels = [n1]*len(pathdir_1) <span class="comment"># label n1 stand for 1</span>
-    labels.extend([n2]*len(pathdir_2)) <span class="comment"># label n2 stand for 2</span>
-
-    <span class="comment"># 打乱数据集</span>
-    img_data = zip(paths,labels)    <span class="comment"># 合并路径和标签</span>
-    img_data = np.array(list(img_data)) <span class="comment"># np.array型可调用shuffle方法进行打乱</span>
-    np.random.shuffle(img_data)     <span class="comment"># 打乱</span>
-    path = [x[<span class="number">0</span>] <span class="keyword">for</span> x <span class="keyword">in</span> img_data] <span class="comment"># 提取图片路径</span>
-
-    label = np.array([x[<span class="number">1</span>] <span class="keyword">for</span> x <span class="keyword">in</span> img_data],dtype=int) <span class="comment"># 提取对应的图片标签，标签为int类型</span>
-    img = np.array(list(map(imgfun,path))) <span class="comment"># 调用imgfun函数提取图片数据并转化成array形式</span>
-
-    <span class="keyword">return</span> img,label</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加载图片</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">imgfun</span><span class="params">(fn)</span>:</span></span><br><span class="line">    image_string = tf.io.read_file(fn)</span><br><span class="line">    image_decoded = tf.image.decode_jpeg(image_string,channels=<span class="number">3</span>)</span><br><span class="line">    image_resized = tf.image.resize(image_decoded, [<span class="number">200</span>, <span class="number">200</span>]) / <span class="number">255.0</span></span><br><span class="line">    image = np.array(image_resized).tolist()</span><br><span class="line">    <span class="keyword">return</span> image</span><br><span class="line"></span><br><span class="line"><span class="comment"># 处理图片</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">process_img</span><span class="params">(pdir_1,pdir_2,n1,n2)</span>:</span></span><br><span class="line">    pathdir_1 = os.listdir(pdir_1) <span class="comment"># 根目录</span></span><br><span class="line">    pathdir_2 = os.listdir(pdir_2)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 路径合并</span></span><br><span class="line">    paths = [pdir_1 + path <span class="keyword">for</span> path <span class="keyword">in</span> pathdir_1]</span><br><span class="line">    paths.extend([pdir_2 + path <span class="keyword">for</span> path <span class="keyword">in</span> pathdir_2]) <span class="comment"># 合并形成完整图片路径</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 添加标签</span></span><br><span class="line">    labels = [n1]*len(pathdir_1) <span class="comment"># label n1 stand for 1</span></span><br><span class="line">    labels.extend([n2]*len(pathdir_2)) <span class="comment"># label n2 stand for 2</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 打乱数据集</span></span><br><span class="line">    img_data = zip(paths,labels)    <span class="comment"># 合并路径和标签</span></span><br><span class="line">    img_data = np.array(list(img_data)) <span class="comment"># np.array型可调用shuffle方法进行打乱</span></span><br><span class="line">    np.random.shuffle(img_data)     <span class="comment"># 打乱</span></span><br><span class="line">    path = [x[<span class="number">0</span>] <span class="keyword">for</span> x <span class="keyword">in</span> img_data] <span class="comment"># 提取图片路径</span></span><br><span class="line">    </span><br><span class="line">    label = np.array([x[<span class="number">1</span>] <span class="keyword">for</span> x <span class="keyword">in</span> img_data],dtype=int) <span class="comment"># 提取对应的图片标签，标签为int类型</span></span><br><span class="line">    img = np.array(list(map(imgfun,path))) <span class="comment"># 调用imgfun函数提取图片数据并转化成array形式</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> img,label</span><br></pre></td></tr></table></figure>
 <p>上述代码运行结果：<br><img src="/images/result_1.png" alt=""></p>
 <p>在上面代码中我遇到一个map函数，刚开始发现它返回的是一个迭代器类型，我遍历一遍之后再次遍历发现就没有输出结果了，我百度之后get到了一个新的知识点：</p>
 <blockquote>
@@ -224,7 +201,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-11-26T14:11:10.535Z" itemprop="dateUpdated">2019-11-26 22:11:10</time>
+    最后更新时间：<time datetime="2019-11-27T12:37:45.627Z" itemprop="dateUpdated">2019-11-27 20:37:45</time>
 </span><br>
 
 
@@ -250,6 +227,8 @@
 
         <div class="post-footer">
             
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TensorFlow2-0/" rel="tag">TensorFlow2.0</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%BE%E5%83%8F/" rel="tag">图像</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E8%AF%BB%E5%8F%96/" rel="tag">数据读取</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
+
 
             
 <div class="page-share-wrap">
@@ -258,7 +237,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/11/15/TensorFlow2.0%E8%AF%BB%E5%8F%96%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE/&title=《TensorFlow2.0读取图片数据》 — 世纪小小孟&pic=http://yoursite.com/img/panda.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/11/15/TensorFlow2.0%E8%AF%BB%E5%8F%96%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE/&title=《TensorFlow2.0图片数据读取》 — 世纪小小孟&pic=http://yoursite.com/img/panda.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -268,8 +247,12 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/11/15/TensorFlow2.0%E8%AF%BB%E5%8F%96%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE/&title=《TensorFlow2.0读取图片数据》 — 世纪小小孟&source=﻿—
-﻿﻿﻿最近TensorFlow2.0正式发布，而且把Keras合并成为了TensorFlow2.0的一个高级API，这操作简直是爽啊。然后我就屁跌儿..." data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/11/15/TensorFlow2.0%E8%AF%BB%E5%8F%96%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE/&title=《TensorFlow2.0图片数据读取》 — 世纪小小孟&source=
+                
+                    
+                    
+                
+..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -279,7 +262,7 @@
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《TensorFlow2.0读取图片数据》 — 世纪小小孟&url=http://yoursite.com/2019/11/15/TensorFlow2.0%E8%AF%BB%E5%8F%96%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《TensorFlow2.0图片数据读取》 — 世纪小小孟&url=http://yoursite.com/2019/11/15/TensorFlow2.0%E8%AF%BB%E5%8F%96%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE/&via=http://yoursite.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
@@ -307,7 +290,7 @@
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/2019/11/26/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95-%E6%A3%8B%E7%9B%98%E8%A6%86%E7%9B%96%E9%97%AE%E9%A2%98/" id="post-prev" class="post-nav-link">
+      <a href="/2019/11/16/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95-%E6%A3%8B%E7%9B%98%E8%A6%86%E7%9B%96%E9%97%AE%E9%A2%98/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
         <h4 class="title">分治算法-棋盘覆盖问题</h4>
       </a>
@@ -409,7 +392,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/11/15/TensorFlow2.0%E8%AF%BB%E5%8F%96%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE/&title=《TensorFlow2.0读取图片数据》 — 世纪小小孟&pic=http://yoursite.com/img/panda.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/11/15/TensorFlow2.0%E8%AF%BB%E5%8F%96%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE/&title=《TensorFlow2.0图片数据读取》 — 世纪小小孟&pic=http://yoursite.com/img/panda.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -419,8 +402,12 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/11/15/TensorFlow2.0%E8%AF%BB%E5%8F%96%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE/&title=《TensorFlow2.0读取图片数据》 — 世纪小小孟&source=﻿—
-﻿﻿﻿最近TensorFlow2.0正式发布，而且把Keras合并成为了TensorFlow2.0的一个高级API，这操作简直是爽啊。然后我就屁跌儿..." data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/11/15/TensorFlow2.0%E8%AF%BB%E5%8F%96%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE/&title=《TensorFlow2.0图片数据读取》 — 世纪小小孟&source=
+                
+                    
+                    
+                
+..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -430,7 +417,7 @@
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《TensorFlow2.0读取图片数据》 — 世纪小小孟&url=http://yoursite.com/2019/11/15/TensorFlow2.0%E8%AF%BB%E5%8F%96%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《TensorFlow2.0图片数据读取》 — 世纪小小孟&url=http://yoursite.com/2019/11/15/TensorFlow2.0%E8%AF%BB%E5%8F%96%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE/&via=http://yoursite.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
