@@ -30,7 +30,7 @@
 <meta property="og:description" content="该篇文章是本人学习C++的学习记录，内容都是本人的独自理解。所以，内容难免会存在不严谨或理解上的偏差等现象，欢迎留言探讨。   1. 面向对象程序设计的基本特点1.1 抽象抽象是指对具">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;1574306470372.jpeg">
-<meta property="og:updated_time" content="2019-11-29T15:17:09.143Z">
+<meta property="og:updated_time" content="2019-11-30T05:31:43.527Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;1574306470372.jpeg">
     
@@ -158,7 +158,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-面向对象程序设计的基本特点"><span class="post-toc-number">1.</span> <span class="post-toc-text">1. 面向对象程序设计的基本特点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-1-抽象"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1.1 抽象</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-2-封装"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">1.2 封装</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-3-继承"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">1.3 继承</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-面向对象程序设计的基本特点"><span class="post-toc-number">1.</span> <span class="post-toc-text">1. 面向对象程序设计的基本特点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-1-抽象"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1.1 抽象</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-2-封装"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">1.2 封装</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-3-继承"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">1.3 继承</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-4-多态"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">1.4 多态</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-类和对象"><span class="post-toc-number">2.</span> <span class="post-toc-text">2. 类和对象</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-1-类的定义"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">2.1 类的定义</span></a></li></ol></li></ol>
         </nav>
     </aside>
 
@@ -219,7 +219,14 @@
 <p>封装使一部分成员作为外部接口，其他成员隐蔽起来，<strong>这样达到了对成员访问权限的合理控制，使不同类之间的相互影响减小到最低限度，增加数据的安全性。</strong>    </p>
 <h3 id="1-3-继承"><a href="#1-3-继承" class="headerlink" title="1.3 继承"></a>1.3 继承</h3><p><strong>思考：</strong><br>虽然对人进行了封装，但是人与人之间又是不同的，比如学生有学号、年级班级等数据以及青年大学习等行为，而老师有工号、讲师/教授/博导等称号以及教书育人等行为。这些不同对象拥有特有的数据和行为。   </p>
 <p><strong>解决：</strong><br>C++提供一种类的继承的机制，允许程序员再保持原有类的特性的基础上，进行更具体、更详细的说明。</p>
+<h3 id="1-4-多态"><a href="#1-4-多态" class="headerlink" title="1.4 多态"></a>1.4 多态</h3><p>例如我们日常生活中所说的打架、打篮球、打酱油，虽然都是“打”，但是含义不同，动作不同。这就是多态性。<br><a href="https://baike.baidu.com/item/%E9%87%8D%E8%BD%BD%E5%87%BD%E6%95%B0/3280477?fr=aladdin" target="_blank" rel="noopener">重载函数</a>就是一种多态的手段。   </p>
+<!--more-->
 
+<p><strong>多态性是指一段程序能够处理多种类型对象的能力。</strong></p>
+<!--more-->
+
+<p>C++中，这种多态性可通过<strong>强制多态、重载多态、类型参数化多态、包含多态</strong>4种形式实现。   </p>
+<h2 id="2-类和对象"><a href="#2-类和对象" class="headerlink" title="2. 类和对象"></a>2. 类和对象</h2><h3 id="2-1-类的定义"><a href="#2-1-类的定义" class="headerlink" title="2.1 类的定义"></a>2.1 类的定义</h3>
         </div>
 
         <blockquote class="post-copyright">
@@ -227,7 +234,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-11-29T15:17:09.143Z" itemprop="dateUpdated">2019-11-29 23:17:09</time>
+    最后更新时间：<time datetime="2019-11-30T05:31:43.527Z" itemprop="dateUpdated">2019-11-30 13:31:43</time>
 </span><br>
 
 
