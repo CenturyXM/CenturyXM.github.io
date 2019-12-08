@@ -21,16 +21,18 @@
     
     
     <meta name="keywords" content="C/C++,小知识点">
-    <meta name="description" content="科普中国：sort函数用于C++中，对给定区间所有元素进行排序，默认为升序，也可进行降序排序。sort函数进行排序的时间复杂度为nlog2n，比冒泡之类的排序算法效率要高，sort函数包含在头文件为#include&amp;lt;algorithm&amp;gt;的C++标准库中。    123456789101112131415161718192021222324252627282930313233#inclu">
+    <meta name="description" content="科普中国：sort函数用于C++中，对给定区间所有元素进行排序，默认为升序，也可进行降序排序。sort函数进行排序的时间复杂度为nlog2n，比冒泡之类的排序算法效率要高，sort函数">
 <meta name="keywords" content="C&#x2F;C++,小知识点">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++中用sort()给数组排序">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;08&#x2F;C-%E4%B8%AD%E7%9A%84sort-%E6%8E%92%E5%BA%8F%E5%87%BD%E6%95%B0&#x2F;index.html">
 <meta property="og:site_name" content="世纪小小孟">
-<meta property="og:description" content="科普中国：sort函数用于C++中，对给定区间所有元素进行排序，默认为升序，也可进行降序排序。sort函数进行排序的时间复杂度为nlog2n，比冒泡之类的排序算法效率要高，sort函数包含在头文件为#include&amp;lt;algorithm&amp;gt;的C++标准库中。    123456789101112131415161718192021222324252627282930313233#inclu">
+<meta property="og:description" content="科普中国：sort函数用于C++中，对给定区间所有元素进行排序，默认为升序，也可进行降序排序。sort函数进行排序的时间复杂度为nlog2n，比冒泡之类的排序算法效率要高，sort函数">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-12-08T14:29:14.113Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;1574306445131.jpeg">
+<meta property="og:updated_time" content="2019-12-08T14:34:22.607Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;1574306445131.jpeg">
     
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
@@ -175,7 +177,15 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>科普中国：sort函数用于C++中，对给定区间所有元素进行排序，默认为升序，也可进行降序排序。sort函数进行排序的时间复杂度为<code>nlog2n</code>，比冒泡之类的排序算法效率要高，sort函数包含在头文件为<code>#include&lt;algorithm&gt;</code>的C++标准库中。   </p>
+            <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/1574306445131.jpeg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>科普中国：sort函数用于C++中，对给定区间所有元素进行排序，默认为升序，也可进行降序排序。sort函数进行排序的时间复杂度为<code>nlog2n</code>，比冒泡之类的排序算法效率要高，sort函数包含在头文件为<code>#include&lt;algorithm&gt;</code>的C++标准库中。<a id="more"></a> </p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt; // 使用sort函数需要包含的头文件 </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 5 <span class="comment">//数组的长度 </span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a&gt;b; <span class="comment">//表示降序，a&lt;b表示升序 </span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> arr1[N] = &#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">2</span>&#125;;</span><br><span class="line">	<span class="keyword">int</span> arr2[N] = &#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">2</span>&#125;;</span><br><span class="line">	<span class="keyword">int</span> arr3[N] = &#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">2</span>&#125;;</span><br><span class="line">	sort(arr1,arr1+N); <span class="comment">//前两个参数是待排序数据的地址范围 默认升序 </span></span><br><span class="line">	sort(arr2,arr2+N,cmp); <span class="comment">//若想降序则需要自定义cmp函数 </span></span><br><span class="line">	sort(arr3+<span class="number">1</span>,arr3+<span class="number">4</span>); <span class="comment">//局部排序 </span></span><br><span class="line">	</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">"升序arr1:\t"</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;N;i++) </span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;arr1[i]&lt;&lt;<span class="string">"\t"</span>; <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">"降序arr2:\t"</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;N;i++) </span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;arr2[i]&lt;&lt;<span class="string">"\t"</span>; <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">"局部arr3:\t"</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;N;i++) </span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;arr3[i]&lt;&lt;<span class="string">"\t"</span>; <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">运行结果：</span></span><br><span class="line"><span class="comment">升序arr1:       1       2       2       3       4</span></span><br><span class="line"><span class="comment">降序arr2:       4       3       2       2       1</span></span><br><span class="line"><span class="comment">局部arr3:       2       1       3       4       2</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
 
         </div>
@@ -185,7 +195,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-12-08T14:29:14.113Z" itemprop="dateUpdated">2019-12-08 22:29:14</time>
+    最后更新时间：<time datetime="2019-12-08T14:34:22.607Z" itemprop="dateUpdated">2019-12-08 22:34:22</time>
 </span><br>
 
 
@@ -231,7 +241,12 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/08/C-%E4%B8%AD%E7%9A%84sort-%E6%8E%92%E5%BA%8F%E5%87%BD%E6%95%B0/&title=《C++中用sort()给数组排序》 — 世纪小小孟&source=生死看淡 不服就干" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/08/C-%E4%B8%AD%E7%9A%84sort-%E6%8E%92%E5%BA%8F%E5%87%BD%E6%95%B0/&title=《C++中用sort()给数组排序》 — 世纪小小孟&source=
+                
+                    
+                    
+                
+..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -405,7 +420,12 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/08/C-%E4%B8%AD%E7%9A%84sort-%E6%8E%92%E5%BA%8F%E5%87%BD%E6%95%B0/&title=《C++中用sort()给数组排序》 — 世纪小小孟&source=生死看淡 不服就干" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/08/C-%E4%B8%AD%E7%9A%84sort-%E6%8E%92%E5%BA%8F%E5%87%BD%E6%95%B0/&title=《C++中用sort()给数组排序》 — 世纪小小孟&source=
+                
+                    
+                    
+                
+..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
