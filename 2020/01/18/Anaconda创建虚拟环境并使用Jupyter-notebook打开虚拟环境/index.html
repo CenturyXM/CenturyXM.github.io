@@ -34,7 +34,7 @@
 <meta property="og:image" content="http:&#x2F;&#x2F;q4awv6c5w.bkt.clouddn.com&#x2F;jupyter_LJpy3.6.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;q4awv6c5w.bkt.clouddn.com&#x2F;error127.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;q4awv6c5w.bkt.clouddn.com&#x2F;solveerror127.png">
-<meta property="og:updated_time" content="2020-01-18T13:03:54.936Z">
+<meta property="og:updated_time" content="2020-01-18T13:09:29.936Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;q4awv6c5w.bkt.clouddn.com&#x2F;1574306434171.jpeg">
     
@@ -145,7 +145,7 @@
 </time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E4%BD%BF%E7%94%A8%E5%B7%A5%E5%85%B7-%E6%93%8D%E4%BD%9C/">使用工具/操作</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7-%E6%93%8D%E4%BD%9C/">实用工具/操作</a></li></ul>
 
             
         </h5>
@@ -176,7 +176,7 @@
             <time class="post-time" title="2020-01-18 19:08:40" datetime="2020-01-18T11:08:40.000Z"  itemprop="datePublished">2020-01-18</time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E4%BD%BF%E7%94%A8%E5%B7%A5%E5%85%B7-%E6%93%8D%E4%BD%9C/">使用工具/操作</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7-%E6%93%8D%E4%BD%9C/">实用工具/操作</a></li></ul>
 
 
 
@@ -198,23 +198,18 @@
 
 <p>由于需要使用Tensorflow的1.xx的低版本，但是cmd下载一直报错没有解决，就想着用Anaconda，但是真实环境我已经装上Tensorflow2.0了不想换了，所以就想着再建一个python3.6的虚拟环境。不过这个过程还是比较曲折的，这篇文章把整个过程的操作和报错解决方法记录下来，以备后用。内容包括虚拟环境建立、添加虚拟环境到jupyter notebook以及错误解决方法<a id="more"></a></p>
 <h1 id="建立Anaconda虚拟环境"><a href="#建立Anaconda虚拟环境" class="headerlink" title="建立Anaconda虚拟环境"></a>建立Anaconda虚拟环境</h1><ol>
-<li><p>以管理员身份运行<strong>Anaconda Prompt</strong></p>
-</li>
-<li><p>输入以下命令：<br><code>conda create --name your_env_name python=x.x</code>    </p>
-<p>your_env_name 是你的虚拟环境的名称，x.x是      虚拟环境的python的版本，根据需求来定。<br>这一步我遇到了<code>[WinError 127] 找不到系统文件</code>的错误。解决方式见第三节。</p>
-</li>
-<li><p>激活虚拟环境<br><code>windows: activate py3env</code><br><code>Linux: source activate py3env</code><br>激活后就是进入了新建的虚拟环境，如下图：</p>
-<figure class="image-bubble">
+<li>以管理员身份运行<strong>Anaconda Prompt</strong></li>
+<li>输入以下命令：<br><code>conda create --name your_env_name python=x.x</code><br>your_env_name 是你的虚拟环境的名称，x.x是      虚拟环境的python的版本，根据需求来定。<br>这一步我遇到了<code>[WinError 127] 找不到系统文件</code>的错误。解决方式见第三节。</li>
+<li>激活虚拟环境<br><code>windows: activate py3env</code><br><code>Linux: source activate py3env</code><br>激活后就是进入了新建的虚拟环境，如下图：<figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="http://q4awv6c5w.bkt.clouddn.com/activate_new_env.png" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure>
-
-</li>
+虚拟环境建立完成，可以安装各种包了。        </li>
 </ol>
-<p>虚拟环境建立完成，可以安装各种包了。<br><strong>附：</strong>   </p>
+<p><strong>附：</strong>   </p>
 <ol>
 <li>退出虚拟环境：<br><code>deactivate</code></li>
 <li>查找虚拟环境：<br><code>conda info -e   或者   conda info --envs</code><br>带有“*”的是默认真实环境。         </li>
@@ -256,7 +251,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2020-01-18T13:03:54.936Z" itemprop="dateUpdated">2020-01-18 21:03:54</time>
+    最后更新时间：<time datetime="2020-01-18T13:09:29.936Z" itemprop="dateUpdated">2020-01-18 21:09:29</time>
 </span><br>
 
 
