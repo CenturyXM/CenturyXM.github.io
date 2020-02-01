@@ -32,7 +32,9 @@
 <meta property="og:image" content="http:&#x2F;&#x2F;q4awv6c5w.bkt.clouddn.com&#x2F;1574306452663.jpeg">
 <meta property="og:image" content="http:&#x2F;&#x2F;q4awv6c5w.bkt.clouddn.com&#x2F;测试数据.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;q4awv6c5w.bkt.clouddn.com&#x2F;%E7%86%B5%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F.png">
-<meta property="og:updated_time" content="2020-02-01T14:13:07.478Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;q4awv6c5w.bkt.clouddn.com&#x2F;%E5%86%B3%E7%AD%96%E6%A0%91%E6%9E%84%E5%BB%BA%E6%B5%81%E7%A8%8B.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;q4awv6c5w.bkt.clouddn.com&#x2F;%E5%86%B3%E7%AD%96%E6%A0%91%E6%9E%84%E5%BB%BA%E7%AC%AC%E4%B8%80%E8%BD%AE.png">
+<meta property="og:updated_time" content="2020-02-01T14:22:22.273Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;q4awv6c5w.bkt.clouddn.com&#x2F;1574306452663.jpeg">
     
@@ -160,7 +162,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#测试数据"><span class="post-toc-number">1.</span> <span class="post-toc-text">测试数据</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#信息熵"><span class="post-toc-number">2.</span> <span class="post-toc-text">信息熵</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#条件熵"><span class="post-toc-number">3.</span> <span class="post-toc-text">条件熵</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#信息增益"><span class="post-toc-number">4.</span> <span class="post-toc-text">信息增益</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#测试数据"><span class="post-toc-number">1.</span> <span class="post-toc-text">测试数据</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#信息熵"><span class="post-toc-number">2.</span> <span class="post-toc-text">信息熵</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#条件熵"><span class="post-toc-number">3.</span> <span class="post-toc-text">条件熵</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#信息增益"><span class="post-toc-number">4.</span> <span class="post-toc-text">信息增益</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#构建决策树"><span class="post-toc-number">5.</span> <span class="post-toc-text">构建决策树</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#信息增益率"><span class="post-toc-number">6.</span> <span class="post-toc-text">信息增益率</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#感谢"><span class="post-toc-number">7.</span> <span class="post-toc-text">感谢</span></a></li></ol>
         </nav>
     </aside>
 
@@ -203,9 +205,11 @@
                 <div class="image-caption"></div>
             </figure>
 
-<h1 id="信息熵"><a href="#信息熵" class="headerlink" title="信息熵"></a>信息熵</h1><p>记得高中化学书上有关于熵(entropy)的介绍，当时老师说是用来描述事物的混乱程度的。<a href="https://baike.baidu.com/item/%E7%86%B5/101181?fr=aladdin" target="_blank" rel="noopener">百度百科上的熵的定义</a>。<br>信息是个很抽象的概念。人们常常说信息很多，或者信息较少，但却很难说清楚信息到底有多少。比如一本五十万字的中文书到底有多少信息量。<br>直到1948年，<strong>香农</strong>提出了“信息熵(information entropy)”的概念，才解决了对信息的量化度量问题。信息熵这个词是C．E．香农从热力学中借用过来的。热力学中的热熵是表示分子状态混乱程度的物理量。<strong>香农用信息熵的概念来描述信源的不确定度。</strong><br><img src="http://q4awv6c5w.bkt.clouddn.com/%E7%86%B5%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F.png" alt=""></p>
+<h1 id="信息熵"><a href="#信息熵" class="headerlink" title="信息熵"></a>信息熵</h1><p>记得高中化学书上有关于熵(entropy)的介绍，当时老师说是用来描述事物的混乱程度的。<a href="https://baike.baidu.com/item/%E7%86%B5/101181?fr=aladdin" target="_blank" rel="noopener">百度百科上的熵的定义</a>。<br>信息是个很抽象的概念。人们常常说信息很多，或者信息较少，但却很难说清楚信息到底有多少。比如一本五十万字的中文书到底有多少信息量。<br>直到1948年，<strong>香农</strong>提出了“信息熵(information entropy)”的概念，才解决了对信息的量化度量问题。信息熵这个词是C．E．香农从热力学中借用过来的。热力学中的热熵是表示分子状态混乱程度的物理量。<strong>香农用信息熵的概念来描述信源的不确定度。</strong>           </p>
+<p><img src="http://q4awv6c5w.bkt.clouddn.com/%E7%86%B5%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F.png" alt=""></p>
 <p>例如：小明和小华下棋，两人势均力敌，每个人胜利的概率都是1/2，则每局的结果的熵值：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">H(X) = -(0.5\*log0.5 + 0.5\*log0.5) = 1bit</span><br></pre></td></tr></table></figure>
+
 <p><strong>也就是说我们使用1bit大小的空间就能表示结果的所有情况。</strong><br>同理可得测试数据中的play的信息熵是<code>H(play) = 0.940285959bit</code></p>
 <h1 id="条件熵"><a href="#条件熵" class="headerlink" title="条件熵"></a>条件熵</h1><p><strong>我的理解就是：在变量Y确定的情况下，变量X的信息熵。</strong><br>例如测试数据中在temperature变量确定的情况下，计算play的条件熵：<br>|temperature|概率|yes|no|<br>| — | — | — | — |<br>|hot  |    4/14  |  2   |   2  |<br>|mild |   6/14  |  4   |  2   |<br>|cool |   4/14  |   3  |   1  |</p>
 <p>计算：</p>
@@ -214,60 +218,32 @@
 <h1 id="信息增益"><a href="#信息增益" class="headerlink" title="信息增益"></a>信息增益</h1><p><strong>虽然可以采用任何一个特征对数据集进行划分，但最后形成的决策树会差异很大。需要寻找合适的特征，其中就需要信息增益作为参考。称为ID3算法。</strong></p>
 <p><strong>信息增益 = 信息熵 - 条加熵</strong>      </p>
 <p>例如测试数据中第一轮temperature特征的信息增益为：<br><code>gain(temp) = H(play) - H(play|yemp) = 0.029</code><br>同理得到：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">gain(outlook) = 0.247</span><br><span class="line">gain(humidity) = 0.152</span><br><span class="line">gain(windy) = 0.048</span><br><span class="line">```   </span><br><span class="line">       </span><br><span class="line">在选择分支属性时，选择信息增益最大的特征outlook，此时信息熵减少的越多。这样可以使得经过该特征分类之后，**数据的信息熵最小，也就是说数据的“纯度”(确定度)越高。**</span><br><span class="line"></span><br><span class="line"># 构建决策树</span><br><span class="line">流程图：</span><br><span class="line">![](http://q4awv6c5w.bkt.clouddn.com/决策树构建流程.png)</span><br><span class="line">由上图可知，决策树构建过程是一个递归的规程，每一轮构建方式相同。当“**当前节点的所有样本都为同一种类型**”时则结束构建。   </span><br><span class="line">第一轮构建：</span><br><span class="line">![](http://q4awv6c5w.bkt.clouddn.com/决策树构建第一轮.png)</span><br><span class="line"></span><br><span class="line"># 信息增益率</span><br><span class="line">ID3算法具有以下缺点：</span><br><span class="line">1. 对于各类别样本数量不一致的数据, **信息增益偏向于那些更多数值的特征**</span><br><span class="line">2. **容易过拟合**</span><br><span class="line">3. **忽略属性之间的相关性**</span><br><span class="line">**当样本中某个特征的属性很多，且每个属性对应的分类又十分的少时，就会出现信息增益非常大，过拟合现象。**       </span><br><span class="line">例如当某个样本中的一个特征具有n个属性，每个属性对应一个分类，就会出现全部`-1/n*1*log1`的情况，此时的条件熵为0，信息增益最大化。    </span><br><span class="line">为了减少这种现象，引入了信息增益率(C4.5算法)。</span><br></pre></td></tr></table></figure>
-<pre><code>信息增益率 = 条件熵 / 自身的信息熵</code></pre><pre><code>上述例子中，该特征的自身信息熵为`-n*(1/n)*log(1/n) = logn`，当n比较大时，自身信息熵就会非常大，信息增益率就会降低。
+<blockquote>
+<p>gain(outlook) = 0.247<br>gain(humidity) = 0.152<br>gain(windy) = 0.048</p>
+</blockquote>
+<p>在选择分支属性时，选择信息增益最大的特征outlook，此时信息熵减少的越多。这样可以使得经过该特征分类之后，<strong>数据的信息熵最小，也就是说数据的“纯度”(确定度)越高。</strong></p>
+<h1 id="构建决策树"><a href="#构建决策树" class="headerlink" title="构建决策树"></a>构建决策树</h1><p>流程图：</p>
+<p><img src="http://q4awv6c5w.bkt.clouddn.com/%E5%86%B3%E7%AD%96%E6%A0%91%E6%9E%84%E5%BB%BA%E6%B5%81%E7%A8%8B.png" alt=""></p>
+<p>由上图可知，决策树构建过程是一个递归的规程，每一轮构建方式相同。当“<strong>当前节点的所有样本都为同一种类型</strong>”时则结束构建。<br>第一轮构建：</p>
+<p><img src="http://q4awv6c5w.bkt.clouddn.com/%E5%86%B3%E7%AD%96%E6%A0%91%E6%9E%84%E5%BB%BA%E7%AC%AC%E4%B8%80%E8%BD%AE.png" alt=""></p>
+<h1 id="信息增益率"><a href="#信息增益率" class="headerlink" title="信息增益率"></a>信息增益率</h1><p>ID3算法具有以下缺点：</p>
+<ol>
+<li>对于各类别样本数量不一致的数据, <strong>信息增益偏向于那些更多数值的特征</strong></li>
+<li><strong>容易过拟合</strong></li>
+<li><strong>忽略属性之间的相关性</strong></li>
+</ol>
+<p><strong>当样本中某个特征的属性很多，且每个属性对应的分类又十分的少时，就会出现信息增益非常大，过拟合现象。</strong>      </p>
+<p>例如当某个样本中的一个特征具有n个属性，每个属性对应一个分类，就会出现全部<code>-1/n*1*log1</code>的情况，此时的条件熵为0，信息增益最大化。<br>为了减少这种现象，引入了信息增益率(C4.5算法)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">信息增益率 = 条件熵 / 自身的信息熵</span><br></pre></td></tr></table></figure>
 
-# 感谢
-1. [【结合实例】信息增益的计算](https://blog.csdn.net/guomutian911/article/details/78599450/)
-2. [通俗理解条件熵](https://zhuanlan.zhihu.com/p/26551798)
-3. [信息增益到底怎么理解呢？](https://www.zhihu.com/question/22104055)
-4. [决策树基本概念及算法优缺点](https://www.jianshu.com/p/655d8e555494)
+<p>上述例子中，该特征的自身信息熵为<code>-n*(1/n)*log(1/n) = logn</code>，当n比较大时，自身信息熵就会非常大，信息增益率就会降低。</p>
+<h1 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h1><ol>
+<li><a href="https://blog.csdn.net/guomutian911/article/details/78599450/" target="_blank" rel="noopener">【结合实例】信息增益的计算</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/26551798" target="_blank" rel="noopener">通俗理解条件熵</a></li>
+<li><a href="https://www.zhihu.com/question/22104055" target="_blank" rel="noopener">信息增益到底怎么理解呢？</a></li>
+<li><a href="https://www.jianshu.com/p/655d8e555494" target="_blank" rel="noopener">决策树基本概念及算法优缺点</a></li>
+</ol>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</code></pre>
         </div>
 
         <blockquote class="post-copyright">
@@ -275,7 +251,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2020-02-01T14:13:07.478Z" itemprop="dateUpdated">2020-02-01 22:13:07</time>
+    最后更新时间：<time datetime="2020-02-01T14:22:22.273Z" itemprop="dateUpdated">2020-02-01 22:22:22</time>
 </span><br>
 
 
