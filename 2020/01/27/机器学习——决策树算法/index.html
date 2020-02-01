@@ -34,7 +34,7 @@
 <meta property="og:image" content="http:&#x2F;&#x2F;q4awv6c5w.bkt.clouddn.com&#x2F;%E7%86%B5%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;q4awv6c5w.bkt.clouddn.com&#x2F;%E5%86%B3%E7%AD%96%E6%A0%91%E6%9E%84%E5%BB%BA%E6%B5%81%E7%A8%8B.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;q4awv6c5w.bkt.clouddn.com&#x2F;%E5%86%B3%E7%AD%96%E6%A0%91%E6%9E%84%E5%BB%BA%E7%AC%AC%E4%B8%80%E8%BD%AE.png">
-<meta property="og:updated_time" content="2020-02-01T14:22:22.273Z">
+<meta property="og:updated_time" content="2020-02-01T14:25:02.168Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;q4awv6c5w.bkt.clouddn.com&#x2F;1574306452663.jpeg">
     
@@ -211,7 +211,35 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">H(X) = -(0.5\*log0.5 + 0.5\*log0.5) = 1bit</span><br></pre></td></tr></table></figure>
 
 <p><strong>也就是说我们使用1bit大小的空间就能表示结果的所有情况。</strong><br>同理可得测试数据中的play的信息熵是<code>H(play) = 0.940285959bit</code></p>
-<h1 id="条件熵"><a href="#条件熵" class="headerlink" title="条件熵"></a>条件熵</h1><p><strong>我的理解就是：在变量Y确定的情况下，变量X的信息熵。</strong><br>例如测试数据中在temperature变量确定的情况下，计算play的条件熵：<br>|temperature|概率|yes|no|<br>| — | — | — | — |<br>|hot  |    4/14  |  2   |   2  |<br>|mild |   6/14  |  4   |  2   |<br>|cool |   4/14  |   3  |   1  |</p>
+<h1 id="条件熵"><a href="#条件熵" class="headerlink" title="条件熵"></a>条件熵</h1><p><strong>我的理解就是：在变量Y确定的情况下，变量X的信息熵。</strong><br>例如测试数据中在temperature变量确定的情况下，计算play的条件熵：   </p>
+<table>
+<thead>
+<tr>
+<th>temperature</th>
+<th>概率</th>
+<th>yes</th>
+<th>no</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>hot</td>
+<td>4/14</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>mild</td>
+<td>6/14</td>
+<td>4</td>
+<td>2</td>
+</tr>
+<tr>
+<td>cool</td>
+<td>4/14</td>
+<td>3</td>
+<td>1</td>
+</tr>
+</tbody></table>
 <p>计算：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">H(X|temp) = (4/14)*(-2/4*log2/4-2/4*log2/4)+</span><br><span class="line">	        (6/14)*(-4/6*log4/6-2/6*log2/6)+</span><br><span class="line">	        (4/14)*(-3/4*log3/4-1/4*log1/4)</span><br><span class="line">	      = 0.911063393bit</span><br></pre></td></tr></table></figure>
 
@@ -251,7 +279,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2020-02-01T14:22:22.273Z" itemprop="dateUpdated">2020-02-01 22:22:22</time>
+    最后更新时间：<time datetime="2020-02-01T14:25:02.168Z" itemprop="dateUpdated">2020-02-01 22:25:02</time>
 </span><br>
 
 
