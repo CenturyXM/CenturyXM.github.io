@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Python列表的引用与赋值 | 世纪小小孟 | Always believe that something wonderful is about to happen</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Python,小知识点">
+    <meta name="description" content="大家应该都做过这样的一个操作：a=[1,2,3]  b=a，就是简单的对b“赋值”。这里面其实另有玄机……">
+<meta name="keywords" content="Python,小知识点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python列表的引用与赋值">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;24&#x2F;Python%E5%88%97%E8%A1%A8%E7%9A%84%E5%BC%95%E7%94%A8%E4%B8%8E%E8%B5%8B%E5%80%BC&#x2F;index.html">
+<meta property="og:site_name" content="世纪小小孟">
+<meta property="og:description" content="大家应该都做过这样的一个操作：a=[1,2,3]  b=a，就是简单的对b“赋值”。这里面其实另有玄机……">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;%E5%88%97%E8%A1%A8%E8%B5%8B%E5%80%BC%E4%B8%8E%E5%BC%95%E7%94%A8.png">
+<meta property="og:updated_time" content="2020-02-24T14:51:00.636Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;%E5%88%97%E8%A1%A8%E8%B5%8B%E5%80%BC%E4%B8%8E%E5%BC%95%E7%94%A8.png">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/panda.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">孟庆国</h5>
+          <a href="mailto:1635394356@qq.com" target="_blank" rel="noopener" title="1635394356@qq.com" class="mail">1635394356@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/CenturyXM" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Python列表的引用与赋值</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Python列表的引用与赋值</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-02-24T13:24:30.000Z" itemprop="datePublished" class="page-time">
+  2020-02-24
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-Python列表的引用与赋值"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Python列表的引用与赋值</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-02-24 21:24:30" datetime="2020-02-24T13:24:30.000Z"  itemprop="datePublished">2020-02-24</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>大家应该都做过这样的一个操作：<code>a=[1,2,3]  b=a</code>，就是简单的对b“赋值”。这里面其实另有玄机……<a id="more"></a></p>
+<p>先看看下面的这些操作：       </p>
+<p><img src="/images/%E5%88%97%E8%A1%A8%E8%B5%8B%E5%80%BC%E4%B8%8E%E5%BC%95%E7%94%A8.png" alt=""></p>
+<p>我们注意到一个问题：<strong><code>b = a</code>操作实际上不是把a的内容复制一份给b，而是a和b指向同一个列表；而且进行操作<code>a = [4,5,6]</code>后，a就不和b指向同一列表了。</strong>      </p>
+<p>对于这些问题，我个人这样理解：<br><strong>首先python是一种面向对象的编程语言，代码之间皆为对象。那么操作<code>a = [1,2,3]</code>，就是a是一个对象的引用，这个对象是一个列表，列表的内容是<code>1,2,3</code>，而操作<code>b = a</code>实际上就是把a引用赋值给b，那么b也就自然而然的也是一个引用，而且与a是地址一样的引用。所以通过索引修改值时a和b都会更新。<br>而对于<code>a = [4,5,6]</code>操作，<code>[4,5,6]</code>就是一个新的对象，且引用名为a。那么实际上就是修改了a的指向，但是并没有对b的指向进行操作，所以b还是原来列表对象的引用，而a则是新的列表的引用。</strong></p>
+<p>那么当我们不希望通过<code>=</code>操作后它们指向同一个列表，则可以进行如下操作:    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">b = a[:]</span><br><span class="line">print(a,b)</span><br></pre></td></tr></table></figure>
+<p>通过列表切片方式，就像是函数操作一样，返回值是一个列表，这个列表赋值给了变量b。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-02-24T14:51:00.636Z" itemprop="dateUpdated">2020-02-24 22:51:00</time>
+</span><br>
+
+
+        
+        永远相信美好的事情即将发生
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/panda.jpg" alt="孟庆国">
+            孟庆国
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/" rel="tag">小知识点</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/02/24/Python%E5%88%97%E8%A1%A8%E7%9A%84%E5%BC%95%E7%94%A8%E4%B8%8E%E8%B5%8B%E5%80%BC/&title=《Python列表的引用与赋值》 — 世纪小小孟&pic=http://yoursite.com/img/panda.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/02/24/Python%E5%88%97%E8%A1%A8%E7%9A%84%E5%BC%95%E7%94%A8%E4%B8%8E%E8%B5%8B%E5%80%BC/&title=《Python列表的引用与赋值》 — 世纪小小孟&source=大家应该都做过这样的一个操作：a=[1,2,3]  b=a，就是简单的对b“赋值”。这里面其实另有玄机……" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/02/24/Python%E5%88%97%E8%A1%A8%E7%9A%84%E5%BC%95%E7%94%A8%E4%B8%8E%E8%B5%8B%E5%80%BC/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Python列表的引用与赋值》 — 世纪小小孟&url=http://yoursite.com/2020/02/24/Python%E5%88%97%E8%A1%A8%E7%9A%84%E5%BC%95%E7%94%A8%E4%B8%8E%E8%B5%8B%E5%80%BC/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/02/24/Python%E5%88%97%E8%A1%A8%E7%9A%84%E5%BC%95%E7%94%A8%E4%B8%8E%E8%B5%8B%E5%80%BC/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" target="_blank" rel="noopener" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/02/24/Python%E5%88%97%E8%A1%A8%E4%BF%9D%E5%BA%8F%E5%8E%BB%E9%87%8D/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Python列表保序去重</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "M5bREJ0rm3EjUX51RhjMSedl-gzGzoHsz",
+            appKey: "713vTRrMCqUXUtfnOpoOtz7b",
+            avatar: "mm",
+            placeholder: "留言",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        知识付费~开个玩笑~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>孟庆国 &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" target="_blank" rel="noopener" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/02/24/Python%E5%88%97%E8%A1%A8%E7%9A%84%E5%BC%95%E7%94%A8%E4%B8%8E%E8%B5%8B%E5%80%BC/&title=《Python列表的引用与赋值》 — 世纪小小孟&pic=http://yoursite.com/img/panda.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/02/24/Python%E5%88%97%E8%A1%A8%E7%9A%84%E5%BC%95%E7%94%A8%E4%B8%8E%E8%B5%8B%E5%80%BC/&title=《Python列表的引用与赋值》 — 世纪小小孟&source=大家应该都做过这样的一个操作：a=[1,2,3]  b=a，就是简单的对b“赋值”。这里面其实另有玄机……" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/02/24/Python%E5%88%97%E8%A1%A8%E7%9A%84%E5%BC%95%E7%94%A8%E4%B8%8E%E8%B5%8B%E5%80%BC/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Python列表的引用与赋值》 — 世纪小小孟&url=http://yoursite.com/2020/02/24/Python%E5%88%97%E8%A1%A8%E7%9A%84%E5%BC%95%E7%94%A8%E4%B8%8E%E8%B5%8B%E5%80%BC/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/02/24/Python%E5%88%97%E8%A1%A8%E7%9A%84%E5%BC%95%E7%94%A8%E4%B8%8E%E8%B5%8B%E5%80%BC/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2020/02/24/Python%E5%88%97%E8%A1%A8%E7%9A%84%E5%BC%95%E7%94%A8%E4%B8%8E%E8%B5%8B%E5%80%BC/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
