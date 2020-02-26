@@ -20,19 +20,19 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="小知识点,Python">
+    <meta name="keywords" content="Python,小知识点">
     <meta name="description" content="相信大家应该都有过对Python列表做过去重的操作，那么很多人应该都有过这样去重的操作：list(set(a))。但是由于经过set操作后生成的集合虽然无重复，但是是无序的。那么当我们需要在去重的同时又要保证列表顺序保持不变该怎样处理呢？">
-<meta name="keywords" content="小知识点,Python">
+<meta name="keywords" content="Python,小知识点">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python列表保序去重">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;24&#x2F;Python%E5%88%97%E8%A1%A8%E4%BF%9D%E5%BA%8F%E5%8E%BB%E9%87%8D&#x2F;index.html">
 <meta property="og:site_name" content="世纪小小孟">
 <meta property="og:description" content="相信大家应该都有过对Python列表做过去重的操作，那么很多人应该都有过这样去重的操作：list(set(a))。但是由于经过set操作后生成的集合虽然无重复，但是是无序的。那么当我们需要在去重的同时又要保证列表顺序保持不变该怎样处理呢？">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;保序去重.png">
-<meta property="og:updated_time" content="2020-02-24T14:51:10.649Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;%E4%BF%9D%E5%BA%8F%E5%8E%BB%E9%87%8D.png">
+<meta property="og:updated_time" content="2020-02-26T09:41:16.061Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;保序去重.png">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;%E4%BF%9D%E5%BA%8F%E5%8E%BB%E9%87%8D.png">
     
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
@@ -194,45 +194,9 @@
 <p>虽然上述方法比较简单，但是同时也必须需要开辟新的列表blist，占用空间。可以做一下小改进：      </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">alist = [<span class="number">5</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">1</span>]</span><br><span class="line">ind = alist.index <span class="comment"># 提前获取去重前的index</span></span><br><span class="line">alist = list(set(alist))</span><br><span class="line">alist.sort(key=ind)</span><br><span class="line">print(alist)</span><br></pre></td></tr></table></figure>
 
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/images/保序去重.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<p><img src="/images/%E4%BF%9D%E5%BA%8F%E5%8E%BB%E9%87%8D.png" alt=""></p>
 
         </div>
 
@@ -241,7 +205,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2020-02-24T14:51:10.649Z" itemprop="dateUpdated">2020-02-24 22:51:10</time>
+    最后更新时间：<time datetime="2020-02-26T09:41:16.061Z" itemprop="dateUpdated">2020-02-26 17:41:16</time>
 </span><br>
 
 
