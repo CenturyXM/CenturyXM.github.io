@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>IEEE754标准下的32位浮点数 | 世纪小小孟 | Always believe that something wonderful is about to happen</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="浮点数,IEEE754">
+    <meta name="description" content="这学期开了计算机组成原理这门课，第二周学习的浮点数表示时对IEEE754标准有点小懵逼。主要是思想还停留在十进制的世界里，而且没有搞懂为什么阶码偏移值是127。">
+<meta name="keywords" content="浮点数,IEEE754">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IEEE754标准下的32位浮点数">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;27&#x2F;IEEE754%E6%A0%87%E5%87%86%E4%B8%8B%E7%9A%8432%E4%BD%8D%E6%B5%AE%E7%82%B9%E6%95%B0&#x2F;index.html">
+<meta property="og:site_name" content="世纪小小孟">
+<meta property="og:description" content="这学期开了计算机组成原理这门课，第二周学习的浮点数表示时对IEEE754标准有点小懵逼。主要是思想还停留在十进制的世界里，而且没有搞懂为什么阶码偏移值是127。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;1574306436797.jpeg">
+<meta property="og:image" content="https:&#x2F;&#x2F;centuryxm.oss-cn-hangzhou.aliyuncs.com&#x2F;&#x2F;IEEE754%E5%8D%95%E7%B2%BE%E5%BA%A6%E6%B5%AE%E7%82%B9%E6%95%B0%E8%A1%A8%E7%A4%BA.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;centuryxm.oss-cn-hangzhou.aliyuncs.com&#x2F;&#x2F;IEEE754%E5%8D%95%E7%B2%BE%E5%BA%A6%E6%B5%AE%E7%82%B9%E6%95%B0%E7%9C%9F%E5%80%BC%E8%A1%A8%E7%A4%BA%E5%BD%A2%E5%BC%8F.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;centuryxm.oss-cn-hangzhou.aliyuncs.com&#x2F;&#x2F;%E7%9C%9F%E5%80%BC%E4%B8%8EIEEE754%E8%BD%AC%E5%8C%96%E6%B5%81%E7%A8%8B.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;centuryxm.oss-cn-hangzhou.aliyuncs.com&#x2F;&#x2F;%E7%9C%9F%E5%80%BC%E8%BD%AC%E4%B8%BA%E6%B5%AE%E7%82%B9%E6%95%B0.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;centuryxm.oss-cn-hangzhou.aliyuncs.com&#x2F;&#x2F;%E6%B5%AE%E7%82%B9%E6%95%B0%E5%88%B0%E7%9C%9F%E5%80%BC.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;centuryxm.oss-cn-hangzhou.aliyuncs.com&#x2F;&#x2F;IEEE754%E4%B8%8D%E5%90%8C%E5%8F%96%E5%80%BC%E7%9A%84%E6%83%85%E5%86%B5.png">
+<meta property="og:updated_time" content="2020-02-27T02:03:41.205Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;1574306436797.jpeg">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/panda.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">孟庆国</h5>
+          <a href="mailto:1635394356@qq.com" target="_blank" rel="noopener" title="1635394356@qq.com" class="mail">1635394356@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/CenturyXM" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">IEEE754标准下的32位浮点数</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">IEEE754标准下的32位浮点数</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-02-27T01:11:20.000Z" itemprop="datePublished" class="page-time">
+  2020-02-27
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#认识IEEE754单精度浮点数"><span class="post-toc-number">1.</span> <span class="post-toc-text">认识IEEE754单精度浮点数</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#真值与浮点数之间的转换"><span class="post-toc-number">2.</span> <span class="post-toc-text">真值与浮点数之间的转换</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#真值转化为浮点数"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">真值转化为浮点数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#浮点数转化为真值"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">浮点数转化为真值</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#为何阶码的偏移值为127而不是128"><span class="post-toc-number">3.</span> <span class="post-toc-text">为何阶码的偏移值为127而不是128</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#感谢"><span class="post-toc-number">4.</span> <span class="post-toc-text">感谢</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-IEEE754标准下的32位浮点数"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">IEEE754标准下的32位浮点数</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-02-27 09:11:20" datetime="2020-02-27T01:11:20.000Z"  itemprop="datePublished">2020-02-27</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p><img src="/images/1574306436797.jpeg" alt=""></p>
+<p>这学期开了计算机组成原理这门课，第二周学习的浮点数表示时对IEEE754标准有点小懵逼。主要是思想还停留在十进制的世界里，而且没有搞懂为什么阶码偏移值是127。<a id="more"></a></p>
+<h1 id="认识IEEE754单精度浮点数"><a href="#认识IEEE754单精度浮点数" class="headerlink" title="认识IEEE754单精度浮点数"></a>认识IEEE754单精度浮点数</h1><p>IEEE754浮点数由<code>符号位S</code>、<code>阶码部分E</code>、<code>位数部分M</code>组成。单精度浮点数具体形式如下：</p>
+<p><img src="https://centuryxm.oss-cn-hangzhou.aliyuncs.com//IEEE754%E5%8D%95%E7%B2%BE%E5%BA%A6%E6%B5%AE%E7%82%B9%E6%95%B0%E8%A1%A8%E7%A4%BA.png" alt=""></p>
+<ol>
+<li>关于阶码字段E，采用偏移值为127的移码表示(为什么采用127下面等会再讲)。</li>
+<li>关于位数M，在IEEE754中约定小数点左边隐含一位1，即有效位数是24位，完整尾数形式为<code>1.M</code>。</li>
+</ol>
+<p>综上所述，IEEE754格式对应的浮点数真值可表示为：</p>
+<p><img src="https://centuryxm.oss-cn-hangzhou.aliyuncs.com//IEEE754%E5%8D%95%E7%B2%BE%E5%BA%A6%E6%B5%AE%E7%82%B9%E6%95%B0%E7%9C%9F%E5%80%BC%E8%A1%A8%E7%A4%BA%E5%BD%A2%E5%BC%8F.png" alt=""></p>
+<h1 id="真值与浮点数之间的转换"><a href="#真值与浮点数之间的转换" class="headerlink" title="真值与浮点数之间的转换"></a>真值与浮点数之间的转换</h1><p>IEEE754单精度浮点数与对应真值之间的转换流程：</p>
+<p><img src="https://centuryxm.oss-cn-hangzhou.aliyuncs.com//%E7%9C%9F%E5%80%BC%E4%B8%8EIEEE754%E8%BD%AC%E5%8C%96%E6%B5%81%E7%A8%8B.png" alt=""></p>
+<h2 id="真值转化为浮点数"><a href="#真值转化为浮点数" class="headerlink" title="真值转化为浮点数"></a>真值转化为浮点数</h2><p><img src="https://centuryxm.oss-cn-hangzhou.aliyuncs.com//%E7%9C%9F%E5%80%BC%E8%BD%AC%E4%B8%BA%E6%B5%AE%E7%82%B9%E6%95%B0.png" alt=""></p>
+<h2 id="浮点数转化为真值"><a href="#浮点数转化为真值" class="headerlink" title="浮点数转化为真值"></a>浮点数转化为真值</h2><p><img src="https://centuryxm.oss-cn-hangzhou.aliyuncs.com//%E6%B5%AE%E7%82%B9%E6%95%B0%E5%88%B0%E7%9C%9F%E5%80%BC.png" alt=""></p>
+<h1 id="为何阶码的偏移值为127而不是128"><a href="#为何阶码的偏移值为127而不是128" class="headerlink" title="为何阶码的偏移值为127而不是128"></a>为何阶码的偏移值为127而不是128</h1><p>首先要明白IEEE754标准中规定的特殊值：</p>
+<p><img src="https://centuryxm.oss-cn-hangzhou.aliyuncs.com//IEEE754%E4%B8%8D%E5%90%8C%E5%8F%96%E5%80%BC%E7%9A%84%E6%83%85%E5%86%B5.png" alt=""></p>
+<p>所以,在规格化表示中8位移码理论上可以表示的表示范围为0~ 255,但是IEEE754中又规定,当阶码为00000000,尾数也为0的时候表示真值为0,结合S符号位,有正0和负0之分;而当阶码为11111111,尾数为0时,表示真值为无穷大,结合S符号位,有正无穷大和负无穷大,但是为了在规格化的浮点数中规避掉这种情况,所以将偏移值选择127,而不选128;这样阶码就变成1~ 254,对应的指数值就为-126~127;这也就解释了为什么偏移值要选择127,而不选择128的原因了。</p>
+<h1 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h1><ol>
+<li>《计算机组成原理》，秦磊华，吴非，莫正坤，清华大学出版社</li>
+<li><a href="https://blog.csdn.net/i6223671/article/details/88312191" target="_blank" rel="noopener">计算机组成原理:IEEE754标准中,为什么指数真值e变成阶码加上的偏移值是127不是128?</a></li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-02-27T02:03:41.205Z" itemprop="dateUpdated">2020-02-27 10:03:41</time>
+</span><br>
+
+
+        
+        永远相信美好的事情即将发生
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/panda.jpg" alt="孟庆国">
+            孟庆国
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IEEE754/" rel="tag">IEEE754</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B5%AE%E7%82%B9%E6%95%B0/" rel="tag">浮点数</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/02/27/IEEE754%E6%A0%87%E5%87%86%E4%B8%8B%E7%9A%8432%E4%BD%8D%E6%B5%AE%E7%82%B9%E6%95%B0/&title=《IEEE754标准下的32位浮点数》 — 世纪小小孟&pic=http://yoursite.com/img/panda.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/02/27/IEEE754%E6%A0%87%E5%87%86%E4%B8%8B%E7%9A%8432%E4%BD%8D%E6%B5%AE%E7%82%B9%E6%95%B0/&title=《IEEE754标准下的32位浮点数》 — 世纪小小孟&source=
+这学期开了计算机组成原理这门课，第二周学习的浮点数表示时对IEEE754标准有点小懵逼。主要是思想还停留在十进制的世界里，而且没有搞懂为什么阶码偏移值是..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/02/27/IEEE754%E6%A0%87%E5%87%86%E4%B8%8B%E7%9A%8432%E4%BD%8D%E6%B5%AE%E7%82%B9%E6%95%B0/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《IEEE754标准下的32位浮点数》 — 世纪小小孟&url=http://yoursite.com/2020/02/27/IEEE754%E6%A0%87%E5%87%86%E4%B8%8B%E7%9A%8432%E4%BD%8D%E6%B5%AE%E7%82%B9%E6%95%B0/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/02/27/IEEE754%E6%A0%87%E5%87%86%E4%B8%8B%E7%9A%8432%E4%BD%8D%E6%B5%AE%E7%82%B9%E6%95%B0/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" target="_blank" rel="noopener" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/02/24/Python%E5%88%97%E8%A1%A8%E7%9A%84%E5%BC%95%E7%94%A8%E4%B8%8E%E8%B5%8B%E5%80%BC/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Python列表的引用与赋值</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "M5bREJ0rm3EjUX51RhjMSedl-gzGzoHsz",
+            appKey: "713vTRrMCqUXUtfnOpoOtz7b",
+            avatar: "mm",
+            placeholder: "留言",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        知识付费~开个玩笑~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>孟庆国 &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" target="_blank" rel="noopener" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/02/27/IEEE754%E6%A0%87%E5%87%86%E4%B8%8B%E7%9A%8432%E4%BD%8D%E6%B5%AE%E7%82%B9%E6%95%B0/&title=《IEEE754标准下的32位浮点数》 — 世纪小小孟&pic=http://yoursite.com/img/panda.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/02/27/IEEE754%E6%A0%87%E5%87%86%E4%B8%8B%E7%9A%8432%E4%BD%8D%E6%B5%AE%E7%82%B9%E6%95%B0/&title=《IEEE754标准下的32位浮点数》 — 世纪小小孟&source=
+这学期开了计算机组成原理这门课，第二周学习的浮点数表示时对IEEE754标准有点小懵逼。主要是思想还停留在十进制的世界里，而且没有搞懂为什么阶码偏移值是..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/02/27/IEEE754%E6%A0%87%E5%87%86%E4%B8%8B%E7%9A%8432%E4%BD%8D%E6%B5%AE%E7%82%B9%E6%95%B0/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《IEEE754标准下的32位浮点数》 — 世纪小小孟&url=http://yoursite.com/2020/02/27/IEEE754%E6%A0%87%E5%87%86%E4%B8%8B%E7%9A%8432%E4%BD%8D%E6%B5%AE%E7%82%B9%E6%95%B0/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/02/27/IEEE754%E6%A0%87%E5%87%86%E4%B8%8B%E7%9A%8432%E4%BD%8D%E6%B5%AE%E7%82%B9%E6%95%B0/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2020/02/27/IEEE754%E6%A0%87%E5%87%86%E4%B8%8B%E7%9A%8432%E4%BD%8D%E6%B5%AE%E7%82%B9%E6%95%B0/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
